@@ -14,6 +14,7 @@
 #import "MBProgressHUD.h"
 #import "BrandView.h"
 #import "AppDelegate.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @interface IndexViewController ()
 

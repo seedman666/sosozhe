@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030366AD1A09A56C001BE107 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 030366AC1A09A56C001BE107 /* SearchResultViewController.m */; };
 		031EFEA319055CC900A165C7 /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 031EFEA219055CC900A165C7 /* MyAccountViewController.m */; };
 		0327028D19027E880049827A /* BrandDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0327028C19027E880049827A /* BrandDetailViewController.m */; };
 		03270293190283150049827A /* BrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03270292190283150049827A /* BrandView.m */; };
@@ -104,6 +105,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		030366AB1A09A56C001BE107 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
+		030366AC1A09A56C001BE107 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		031161AE1A012EAF007BBACD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		031EFEA119055CC900A165C7 /* MyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountViewController.h; sourceTree = "<group>"; };
 		031EFEA219055CC900A165C7 /* MyAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountViewController.m; sourceTree = "<group>"; };
@@ -366,6 +369,8 @@
 				0328574F1903DF2A0094517B /* MoreBrandViewController.m */,
 				031EFEA119055CC900A165C7 /* MyAccountViewController.h */,
 				031EFEA219055CC900A165C7 /* MyAccountViewController.m */,
+				030366AB1A09A56C001BE107 /* SearchResultViewController.h */,
+				030366AC1A09A56C001BE107 /* SearchResultViewController.m */,
 			);
 			path = sosozhe;
 			sourceTree = "<group>";
@@ -609,6 +614,7 @@
 				03B51FBE18FD7EA900F862E1 /* ViewController.m in Sources */,
 				032D741318FEDF9200FA8284 /* SGFocusImageItem.m in Sources */,
 				03B51FB818FD7EA900F862E1 /* AppDelegate.m in Sources */,
+				030366AD1A09A56C001BE107 /* SearchResultViewController.m in Sources */,
 				03B51FB418FD7EA900F862E1 /* main.m in Sources */,
 				032D740C18FEDC4000FA8284 /* CustomTextField.m in Sources */,
 				032D740418FECA0D00FA8284 /* IndexViewController.m in Sources */,

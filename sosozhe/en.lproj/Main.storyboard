@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Bab-5L-fdW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Bab-5L-fdW">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
     <scenes>
-        <!--More Brand View Controller - 商城返利-->
+        <!--商城返利-->
         <scene sceneID="9VG-Ug-9Lx">
             <objects>
                 <viewController id="FKV-r7-0Wn" customClass="MoreBrandViewController" sceneMemberID="viewController">
@@ -48,7 +47,7 @@
             </objects>
             <point key="canvasLocation" x="-908" y="-530"/>
         </scene>
-        <!--Index View Controller - 首页-->
+        <!--首页-->
         <scene sceneID="Yo2-QS-YDt">
             <objects>
                 <viewController id="O0r-sB-FPh" customClass="IndexViewController" sceneMemberID="viewController">
@@ -207,7 +206,7 @@
             </objects>
             <point key="canvasLocation" x="-1462" y="579"/>
         </scene>
-        <!--View Controller - 淘宝返利-->
+        <!--淘宝返利-->
         <scene sceneID="iRD-93-mff">
             <objects>
                 <viewController id="TL2-hw-e12" sceneMemberID="viewController">
@@ -225,31 +224,41 @@
         <!--View Controller-->
         <scene sceneID="tDm-IW-KS6">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NFx-Jx-oKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="LXi-zR-Fli" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pYf-rX-NSk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tabBar contentMode="scaleToFill" id="5Pu-9T-P4P">
-                                <rect key="frame" x="0.0" y="510" width="320" height="49"/>
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem title="首页" image="tab_index_1_s.png" id="f0N-oi-7fD"/>
                                     <tabBarItem title="淘宝返利" image="tab_mall_1_s.png" id="629-fi-Zxg"/>
-                                    <tabBarItem title="商城返利" image="tab_tao_2_s.png" id="E5K-tj-BYD"/>
+                                    <tabBarItem title="商城返利" image="tab_tao_2_s.png" selectedImage="tab_tao_2.png" id="E5K-tj-BYD"/>
                                     <tabBarItem title="我的账号" image="tab_user_1_s.png" id="YJr-0b-PS0"/>
                                 </items>
                             </tabBar>
+                            <view contentMode="scaleToFill" id="LsA-0W-did">
+                                <rect key="frame" x="0.0" y="20" width="320" height="57"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="oOn-c0-Z2C">
+                                <rect key="frame" x="0.0" y="77" width="320" height="442"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NFx-Jx-oKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-277" y="937"/>
         </scene>
-        <!--My Account View Controller - 我的账号-->
+        <!--我的账号-->
         <scene sceneID="JfT-tj-Pvb">
             <objects>
                 <viewController id="nHw-qu-ebL" customClass="MyAccountViewController" sceneMemberID="viewController">
@@ -273,6 +282,7 @@
         <image name="tab_index_1_s.png" width="30" height="30"/>
         <image name="tab_mall_1_s.png" width="30" height="30"/>
         <image name="tab_tao_1_s.png" width="30" height="30"/>
+        <image name="tab_tao_2.png" width="50" height="50"/>
         <image name="tab_tao_2_s.png" width="30" height="30"/>
         <image name="tab_user_1_s.png" width="30" height="30"/>
         <image name="top_bg.png" width="3" height="186"/>
@@ -281,7 +291,10 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="0MH-5d-iGQ"/>
