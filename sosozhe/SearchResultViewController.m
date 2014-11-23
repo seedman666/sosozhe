@@ -9,7 +9,8 @@
 #import "SearchResultViewController.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <AFNetworking.h>
-
+#import "AppDelegate.h"
+#import "SearchResultTableViewCell.h"
 
 @interface SearchResultViewController ()
 @property NSArray *searchResult;
@@ -25,6 +26,11 @@
     [self tableView].dataSource=self;
     [self tableView].delegate=self;
     
+    [self.backButton addTarget:self action:@selector(backButtonDown) forControlEvents:UIControlEventTouchDown];
+}
+
+-(void) backButtonDown{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void) notificationHandler:(NSNotification *) notification{
@@ -35,6 +41,8 @@
     NSString *token=[self md5:[NSString stringWithFormat:@"%@%@", timestamp, @"uuN5wmUuRsDe6" ] ];
     NSString *urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@", @"index.php?mod=ajax&act=search&keyword=",text,@"&page_no=1&page_size=30&type=1&timestamp=",timestamp,@"&token=",token ];
     NSLog(@"%@", urlStr);
+    
+    self.searchTextArea.text=text;
     
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -77,22 +85,52 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellWithIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
+    static NSString *CellWithIdentifier = @"SearchTableViewCell";
+    SearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchResultTableViewCell" owner:self options:nil] lastObject];
+        
     }
     NSUInteger row = [indexPath row];
     NSDictionary *dict=[self.searchResult objectAtIndex:row];
     //NSLog(@"%@", dict);
-    cell.textLabel.text = [dict objectForKey:@"title"];
+    //cell.textLabel.text = [dict objectForKey:@"title"];
     NSLog(@"%@", [dict objectForKey:@"pic_url"]);
     NSURL *url = [NSURL URLWithString:[dict objectForKey:@"pic_url"]];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    
-    cell.imageView.image = image;
-    cell.detailTextLabel.text = @"详细信息";
+    cell.imageView.image=image;
+    cell.titleLabel.numberOfLines=2;
+    cell.titleLabel.text=[dict objectForKey:@"title"];
+    cell.moneyLabel.text=[NSString stringWithFormat:@"￥%@",[dict objectForKey:@"price"]];
+    NSNumber *fanli=[dict objectForKey:@"fanli"];
+    if (fanli==0) {
+        cell.fanliLabel.text=@"☆暂无返利";
+    }else{
+        cell.fanliLabel.text=@"☆有返利";
+    }
+    NSNumber *sales=[dict objectForKey:@"volume"];
+    cell.saleLabel.text=[NSString stringWithFormat:@"最近售出：%@", sales];
+//    cell.imageView.image = image;
+    //cell.detailTextLabel.text = [dict objectForKey:@"title"];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    NSUInteger row = [indexPath row];
+//    // 列寬
+//    CGFloat contentWidth = self.tableView.frame.size.width;
+//    // 用何種字體進行顯示
+//    UIFont *font = [UIFont systemFontOfSize:14];
+//    // 該行要顯示的內容
+//    NSDictionary *dict=[self.searchResult objectAtIndex:row];
+//    NSString *content = [dict objectForKey:@"title"];
+//    // 計算出顯示完內容需要的最小尺寸
+//    CGSize size = [content sizeWithFont:font constrainedToSize:CGSizeMake(contentWidth, 1000.0f) lineBreakMode:UILineBreakModeWordWrap];
+//    // 這裏返回需要的高度
+//    return size.height+20;
+    return 95;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -101,9 +139,19 @@
     return  [[self searchResult]count];
 }
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dict=[self.searchResult objectAtIndex:[indexPath row]];
+    NSString *url=[dict objectForKey:@"click_url"];
+    
+    [self performSegueWithIdentifier:@"itemViewDetailId" sender:self];
+    //NSDictionary *dicts = [NSDictionary dictionaryWithObjectsAndKeys:@"url",url, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewParamNotification" object:url];
 }
 
 /*

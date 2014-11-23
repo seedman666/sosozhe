@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITabBarItem *taobaofanliBar;
 @property (weak, nonatomic) IBOutlet UITabBarItem *myAccountBar;
 
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UILabel *searchTextArea;
 
 @end

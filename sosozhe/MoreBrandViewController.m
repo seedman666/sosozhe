@@ -32,7 +32,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //[self requestHotBrand];
+    [[self searchText] setReturnKeyType:UIReturnKeyGo];
+    [[self searchText] setDelegate:self];
+    [self requestHotBrand];
 
 }
 
@@ -104,6 +106,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField{
+    if (textField == [self searchText]) {
+        
+        [textField resignFirstResponder];
+        [self performSegueWithIdentifier:@"SearchViewIde" sender:self];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"searchResultParamNotification" object:textField.text];
+        
+    }
+    return YES;
 }
 
 /*
