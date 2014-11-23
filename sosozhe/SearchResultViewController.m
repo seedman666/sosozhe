@@ -11,10 +11,12 @@
 #import <AFNetworking.h>
 #import "AppDelegate.h"
 #import "SearchResultTableViewCell.h"
+#import "MBProgressHUD.h"
+#import "UIImageView+WebCache.h"
 
-@interface SearchResultViewController ()
+@interface SearchResultViewController ()<MBProgressHUDDelegate>
 @property NSArray *searchResult;
-
+@property MBProgressHUD *HUD;
 @end
 
 @implementation SearchResultViewController
@@ -35,6 +37,14 @@
 
 -(void) notificationHandler:(NSNotification *) notification{
     
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    self.HUD.delegate = self;
+    self.HUD.labelText = @"正在加载数据";
+    self.HUD.dimBackground = YES;
+    [self.HUD show:YES];
+
+    
     NSString *text = [notification object];
     UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
     NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
@@ -53,11 +63,15 @@
     
     [client postPath:urlStr parameters:nil
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 [self.HUD removeFromSuperview];
                  self.searchResult=(NSArray *) [responseObject objectForKey:@"result"];
+
                  [[self tableView] reloadData];
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 [self.HUD removeFromSuperview];
                  NSLog(@"%@", error);
+                 
              }];
     
     
@@ -88,18 +102,16 @@
     static NSString *CellWithIdentifier = @"SearchTableViewCell";
     SearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
     if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchResultTableViewCell" owner:self options:nil] lastObject];
         
     }
     NSUInteger row = [indexPath row];
     NSDictionary *dict=[self.searchResult objectAtIndex:row];
-    //NSLog(@"%@", dict);
-    //cell.textLabel.text = [dict objectForKey:@"title"];
-    NSLog(@"%@", [dict objectForKey:@"pic_url"]);
-    NSURL *url = [NSURL URLWithString:[dict objectForKey:@"pic_url"]];
+    
+    NSURL *url=[NSURL URLWithString:[dict objectForKey:@"pic_url"]];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
     cell.imageView.image=image;
+    
     cell.titleLabel.numberOfLines=2;
     cell.titleLabel.text=[dict objectForKey:@"title"];
     cell.moneyLabel.text=[NSString stringWithFormat:@"￥%@",[dict objectForKey:@"price"]];

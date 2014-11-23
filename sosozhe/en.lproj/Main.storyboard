@@ -30,17 +30,18 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="HZC-lo-ekm">
-                                <rect key="frame" x="0.0" y="62" width="320" height="457"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Omp-UZ-CCp">
+                                <rect key="frame" x="0.0" y="61" width="320" height="457"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="商城返利" image="tab_mall_1_s.png" id="Wn1-xC-NXu"/>
                     <connections>
-                        <outlet property="scrollView" destination="HZC-lo-ekm" id="uvs-vs-wPo"/>
                         <outlet property="searchText" destination="dkc-7y-W6G" id="ETg-nc-rtT"/>
+                        <outlet property="tableView" destination="Omp-UZ-CCp" id="fJP-yR-Mbw"/>
                         <segue destination="r77-PQ-hw1" kind="modal" identifier="brandDetailWebView" id="hq4-jg-7z2"/>
                         <segue destination="LXi-zR-Fli" kind="modal" identifier="SearchViewIde" id="hhO-Sj-eE4"/>
                     </connections>
@@ -208,7 +209,7 @@
             </objects>
             <point key="canvasLocation" x="-1462" y="579"/>
         </scene>
-        <!--淘宝返利-->
+        <!--会员专享-->
         <scene sceneID="iRD-93-mff">
             <objects>
                 <viewController id="TL2-hw-e12" sceneMemberID="viewController">
@@ -217,7 +218,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="淘宝返利" image="tab_tao_1_s.png" id="LNU-m5-3YG"/>
+                    <tabBarItem key="tabBarItem" title="会员专享" image="tab_tao_1_s.png" id="LNU-m5-3YG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wtN-qZ-KQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -325,7 +326,7 @@
         </simulatedScreenMetrics>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="c1J-Pp-uzI"/>
+        <segue reference="hq4-jg-7z2"/>
         <segue reference="hhO-Sj-eE4"/>
     </inferredMetricsTieBreakers>
 </document>

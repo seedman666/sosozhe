@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
+#import "HotBrandTableViewCell.h"
 
-@interface MoreBrandViewController : UIViewController<UITextFieldDelegate>
+@interface MoreBrandViewController : UIViewController<UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CustomTextField *searchText;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

@@ -10,10 +10,12 @@
 #import <AFNetworking.h>
 #import "Header.h"
 #import "BrandView.h"
+#import <math.h>
+#import "MBProgressHUD.h"
 
-
-@interface MoreBrandViewController ()
-
+@interface MoreBrandViewController ()<MBProgressHUDDelegate>
+@property NSArray *results;
+@property MBProgressHUD *HUD;
 @end
 
 @implementation MoreBrandViewController
@@ -34,11 +36,22 @@
     
     [[self searchText] setReturnKeyType:UIReturnKeyGo];
     [[self searchText] setDelegate:self];
+    self.tableView.dataSource=self;
+    self.tableView.delegate=self;
     [self requestHotBrand];
+    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    self.HUD.delegate = self;
+    self.HUD.labelText = @"正在加载数据";
+    self.HUD.dimBackground = YES;
+    [self.HUD show:YES];
+    //[self.HUD showWhileExecuting:@selector(requestHotBrand) onTarget:self withObject:nil animated:YES];
 
 }
 
 -(void) requestHotBrand{
+    
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     NSDictionary *parameters = @{@"page": @"2", @"num" : @"9"};
@@ -47,48 +60,17 @@
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     
-    [client postPath:@"index.php?mod=ajax&act=malls&page=2&num=20" parameters:parameters
+    [client postPath:@"index.php?mod=ajax&act=malls&page=2&num=18" parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSLog(@"%@", responseObject);
                  NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
-                 for (int i=0; i<[array count]; i=i+1) {
-                     NSDictionary *dict=[array objectAtIndex:i];
-                     int j=(i/3)%3;
-                     
-                     NSString *imgUrl=[dict objectForKey:@"img"];
-                     NSString *title=[[dict objectForKey:@"title"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                     NSString *fanRation=[dict objectForKey:@"fan"];
-                     NSString *url=[dict objectForKey:@"url"];
-                     
-                     BrandView *brandView=[[BrandView alloc] initWithFrame:CGRectMake(9+100*(i%3), 29+76*(j%3), 77, 65)];
-                     brandView.url=url;
-                     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(brandViewClick:)];
-                     [brandView addGestureRecognizer:tapGesture];
-                     
-                     
-                     
-                     UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 77, 40)];
-                     UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(5, 41, 50, 25)];
-                     UILabel *fanLabel=[[UILabel alloc] initWithFrame:CGRectMake(60, 41, 30, 25)];
-                     
-                     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgUrl]]];
-                     [imageView setImage:image];
-                     [titleLabel setText:title];
-                     [titleLabel setFont:[UIFont systemFontOfSize:10]];
-                     [fanLabel setText:fanRation];
-                     [fanLabel setFont:[UIFont systemFontOfSize:10]];
-                     [fanLabel setTextColor:[UIColor orangeColor]];
-                     
-                     [brandView addSubview:imageView];
-                     [brandView addSubview:titleLabel];
-                     [brandView addSubview:fanLabel];
-                     
-                     [[self scrollView] addSubview:brandView];
-                 }
-                 
+                 self.results=array;
+                 [self.tableView reloadData];
+                 [self.HUD removeFromSuperview];
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"%@", error);
+                 [self.HUD removeFromSuperview];
              }];
 }
 
@@ -118,6 +100,72 @@
         
     }
     return YES;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellWithIdentifier = @"HotBrandTableViewId";
+    HotBrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"HotBrandTableViewCell" owner:self options:nil] lastObject];
+        
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    if (indexPath.row*3 < self.results.count) {
+        UIView *view1=[self getBrandView:indexPath.row*3];
+        [cell.view1 addSubview:view1];
+    }
+    
+    if (indexPath.row*3+1 < self.results.count) {
+        UIView *view2=[self getBrandView:indexPath.row*3+1];
+        [cell.view2 addSubview:view2];
+    }
+    
+    if (indexPath.row*3+2 < self.results.count) {
+        UIView *view3=[self getBrandView:indexPath.row*3+2];
+        [cell.view3 addSubview:view3];
+    }
+    
+    return cell;
+}
+
+-(UIView *) getBrandView :(NSInteger) index
+{
+    NSDictionary *dict=[self.results objectAtIndex:index];
+    NSString *imgUrl=[dict objectForKey:@"img"];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgUrl]]];
+    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"BrandView" owner:self options:nil];
+    BrandView *view=[nib objectAtIndex:0];
+    if (image) {
+        view.imageView.image=image;
+    }
+    view.fanliLabel.text=[NSString stringWithFormat:@"最高返利：%@", [dict objectForKey:@"fan"]];
+    NSString *url=[dict objectForKey:@"url"];
+    view.url=url;
+
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(brandViewClick:)];
+    [view addGestureRecognizer:tapGesture];
+    
+    return view;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+        return 79;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSLog(@"%lu", (unsigned long)self.results.count);
+    return  ceil([[self results]count]/3.0);
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
 /*

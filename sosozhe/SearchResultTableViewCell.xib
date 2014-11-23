@@ -50,7 +50,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="fanliLabel" destination="1ch-Lt-ElK" id="tcg-eq-yCP"/>
-                <outlet property="imageView" destination="j5h-aa-76S" id="oeT-aZ-bjN"/>
+                <outlet property="imageView" destination="j5h-aa-76S" id="rTc-LC-oMB"/>
                 <outlet property="moneyLabel" destination="PIo-Ks-HYe" id="yqa-iH-jwO"/>
                 <outlet property="saleLabel" destination="5S1-WL-hfI" id="urw-be-PE2"/>
                 <outlet property="titleLabel" destination="p8g-vu-nHt" id="woG-Sp-NEZ"/>

@@ -14,9 +14,10 @@
 #import "MBProgressHUD.h"
 #import "BrandView.h"
 #import "AppDelegate.h"
+#import "MBProgressHUD.h"
 
-@interface IndexViewController ()
-
+@interface IndexViewController ()<MBProgressHUDDelegate>
+@property MBProgressHUD *HUD;
 @end
 
 @implementation IndexViewController
@@ -56,19 +57,12 @@
     
     [self requestHotBrand];
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-
-//    NSDictionary *parameters = @{@"page": @"1", @"num" : @"8"};
-//    [manager POST:@"http://api.sosozhe.com.cn/index.php?mod=ajax&act=malls" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//        [HUD removeFromSuperview];
-//    }];
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    self.HUD.delegate = self;
+    self.HUD.labelText = @"正在加载数据";
+    self.HUD.dimBackground = YES;
+    [self.HUD show:YES];
     
     if (!IS_IPHONE5){
         [[self scrollView] setFrame:CGRectMake(0, 0, 320, 480)];
@@ -90,6 +84,7 @@
 
     [client postPath:@"index.php?mod=ajax&act=malls&page=1&num=8" parameters:parameters
     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.HUD removeFromSuperview];
         NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
         for (int i=0; i<[array count]; i=i+1) {
             NSDictionary *dict=[array objectAtIndex:i];
@@ -137,6 +132,7 @@
 
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.HUD removeFromSuperview];
         NSLog(@"%@", error);
     }];
 }

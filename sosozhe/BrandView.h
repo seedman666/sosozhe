@@ -11,4 +11,7 @@
 @interface BrandView : UIView
 
 @property NSString *url;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *fanliLabel;
+
 @end
