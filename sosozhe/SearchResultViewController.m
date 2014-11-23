@@ -13,6 +13,7 @@
 #import "SearchResultTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
+#import "PullTableView.h"
 
 @interface SearchResultViewController ()<MBProgressHUDDelegate>
 @property NSArray *searchResult;
@@ -25,11 +26,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationHandler:) name:@"searchResultParamNotification" object:nil];
-    [self tableView].dataSource=self;
-    [self tableView].delegate=self;
+    [self searchResultPullTableView].dataSource=self;
+    [self searchResultPullTableView].delegate=self;
     
     [self.backButton addTarget:self action:@selector(backButtonDown) forControlEvents:UIControlEventTouchDown];
+    self.searchResultPullTableView.delegate=self;
+    self.searchResultPullTableView.pullDelegate=self;
+    
+    self.searchResultPullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
+    self.searchResultPullTableView.pullBackgroundColor = [UIColor whiteColor];
+    self.searchResultPullTableView.pullTextColor = [UIColor blackColor];
+
 }
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    
+//    [super viewWillAppear:animated];
+//    if(!self.pullTableView.pullTableIsRefreshing) {
+//        self.pullTableView.pullTableIsRefreshing = YES;
+//        [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+//    }
+//}
 
 -(void) backButtonDown{
     [self dismissModalViewControllerAnimated:YES];
@@ -66,7 +84,7 @@
                  [self.HUD removeFromSuperview];
                  self.searchResult=(NSArray *) [responseObject objectForKey:@"result"];
 
-                 [[self tableView] reloadData];
+                 [[self searchResultPullTableView] reloadData];
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  [self.HUD removeFromSuperview];
@@ -164,6 +182,40 @@
     [self performSegueWithIdentifier:@"itemViewDetailId" sender:self];
     //NSDictionary *dicts = [NSDictionary dictionaryWithObjectsAndKeys:@"url",url, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewParamNotification" object:url];
+}
+
+- (void) refreshTable
+{
+    /*
+     
+     Code to actually refresh goes here.
+     
+     */
+    self.searchResultPullTableView.pullLastRefreshDate = [NSDate date];
+    self.searchResultPullTableView.pullTableIsRefreshing = NO;
+}
+
+- (void) loadMoreDataToTable
+{
+    /*
+     
+     Code to actually load more data goes here.
+     
+     */
+    self.searchResultPullTableView.pullTableIsLoadingMore = NO;
+}
+
+
+#pragma mark - PullTableViewDelegate
+
+- (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
+{
+    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+}
+
+- (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
+{
+    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
 }
 
 /*
