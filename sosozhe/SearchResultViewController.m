@@ -13,11 +13,13 @@
 #import "SearchResultTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
-#import "PullTableView.h"
+#import "MJRefresh.h"
 
 @interface SearchResultViewController ()<MBProgressHUDDelegate>
-@property NSArray *searchResult;
+@property NSMutableArray *searchResult;
 @property MBProgressHUD *HUD;
+@property int page;
+@property NSString *searchText;
 @end
 
 @implementation SearchResultViewController
@@ -31,23 +33,11 @@
     
     [self.backButton addTarget:self action:@selector(backButtonDown) forControlEvents:UIControlEventTouchDown];
     self.searchResultPullTableView.delegate=self;
-    self.searchResultPullTableView.pullDelegate=self;
     
-    self.searchResultPullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
-    self.searchResultPullTableView.pullBackgroundColor = [UIColor whiteColor];
-    self.searchResultPullTableView.pullTextColor = [UIColor blackColor];
-
+    [self.searchResultPullTableView addFooterWithTarget:self action:@selector(loadMoreDataToTable)];
+    
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    
-//    [super viewWillAppear:animated];
-//    if(!self.pullTableView.pullTableIsRefreshing) {
-//        self.pullTableView.pullTableIsRefreshing = YES;
-//        [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
-//    }
-//}
 
 -(void) backButtonDown{
     [self dismissModalViewControllerAnimated:YES];
@@ -63,14 +53,14 @@
     [self.HUD show:YES];
 
     
-    NSString *text = [notification object];
+    self.searchText = [notification object];
     UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
     NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
     NSString *token=[self md5:[NSString stringWithFormat:@"%@%@", timestamp, @"uuN5wmUuRsDe6" ] ];
-    NSString *urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@", @"index.php?mod=ajax&act=search&keyword=",text,@"&page_no=1&page_size=30&type=1&timestamp=",timestamp,@"&token=",token ];
+    NSString *urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@", @"index.php?mod=ajax&act=search&keyword=",self.searchText,@"&page_no=1&page_size=10&type=1&timestamp=",timestamp,@"&token=",token ];
     NSLog(@"%@", urlStr);
     
-    self.searchTextArea.text=text;
+    self.searchTextArea.text=self.searchText;
     
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -82,8 +72,10 @@
     [client postPath:urlStr parameters:nil
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  [self.HUD removeFromSuperview];
-                 self.searchResult=(NSArray *) [responseObject objectForKey:@"result"];
-
+                 
+                 NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
+                 self.searchResult = [NSMutableArray arrayWithArray:array];
+                 
                  [[self searchResultPullTableView] reloadData];
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -184,39 +176,47 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewParamNotification" object:url];
 }
 
-- (void) refreshTable
-{
-    /*
-     
-     Code to actually refresh goes here.
-     
-     */
-    self.searchResultPullTableView.pullLastRefreshDate = [NSDate date];
-    self.searchResultPullTableView.pullTableIsRefreshing = NO;
-}
 
 - (void) loadMoreDataToTable
 {
-    /*
-     
-     Code to actually load more data goes here.
-     
-     */
-    self.searchResultPullTableView.pullTableIsLoadingMore = NO;
+    self.page=self.page+1;
+    
+    UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
+    NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
+    NSString *token=[self md5:[NSString stringWithFormat:@"%@%@", timestamp, @"uuN5wmUuRsDe6" ] ];
+    NSString *urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=search&keyword=",self.searchText,@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&type=1&timestamp=",timestamp,@"&token=",token ];
+    NSLog(@"%@", urlStr);
+    
+    NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
+    
+    [client postPath:urlStr parameters:nil
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
+                 [self.searchResult addObjectsFromArray:array];
+                 
+                 // 2.2秒后刷新表格UI
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                     // 刷新表格
+                     [self.searchResultPullTableView reloadData];
+                     
+                     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+                     [self.searchResultPullTableView footerEndRefreshing];
+                 });
+                 
+             }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 [self.HUD removeFromSuperview];
+                 NSLog(@"%@", error);
+                 
+             }];
+
 }
 
-
-#pragma mark - PullTableViewDelegate
-
-- (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
-{
-    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
-}
-
-- (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
-{
-    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
-}
 
 /*
 #pragma mark - Navigation

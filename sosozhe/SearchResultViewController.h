@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PullTableView.h"
 
-@interface SearchResultViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
-@property (weak, nonatomic) IBOutlet PullTableView *searchResultPullTableView;
+@interface SearchResultViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *searchResultPullTableView;
 @property (weak, nonatomic) IBOutlet UITabBarItem *shouyeBar;
 @property (weak, nonatomic) IBOutlet UITabBarItem *taobaofanliBar;
 @property (weak, nonatomic) IBOutlet UITabBarItem *myAccountBar;

@@ -13,6 +13,6 @@
 @interface MoreBrandViewController : UIViewController<UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CustomTextField *searchText;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *moreBrandPullTableView;
 
 @end

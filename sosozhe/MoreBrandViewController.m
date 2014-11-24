@@ -12,10 +12,12 @@
 #import "BrandView.h"
 #import <math.h>
 #import "MBProgressHUD.h"
+#import "MJRefresh.h"
 
 @interface MoreBrandViewController ()<MBProgressHUDDelegate>
-@property NSArray *results;
+@property NSMutableArray *results;
 @property MBProgressHUD *HUD;
+@property int page;
 @end
 
 @implementation MoreBrandViewController
@@ -36,9 +38,13 @@
     
     [[self searchText] setReturnKeyType:UIReturnKeyGo];
     [[self searchText] setDelegate:self];
-    self.tableView.dataSource=self;
-    self.tableView.delegate=self;
+    self.moreBrandPullTableView.dataSource=self;
+    self.moreBrandPullTableView.delegate=self;
+    self.page=1;
     [self requestHotBrand];
+    
+    [self.moreBrandPullTableView addFooterWithTarget:self action:@selector(loadMoreDataToTable)];
+
     
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
@@ -48,24 +54,27 @@
     [self.HUD show:YES];
     //[self.HUD showWhileExecuting:@selector(requestHotBrand) onTarget:self withObject:nil animated:YES];
 
+    //self.moreBrandPullTableView.pullDelegate=self;
+    //self.moreBrandPullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
+    //self.moreBrandPullTableView.pullBackgroundColor = [UIColor whiteColor];
+    //self.moreBrandPullTableView.pullTextColor = [UIColor blackColor];
 }
 
 -(void) requestHotBrand{
     
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-    NSDictionary *parameters = @{@"page": @"2", @"num" : @"9"};
+    NSDictionary *parameters = @{@"page": @"1", @"num" : @"9"};
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     
-    [client postPath:@"index.php?mod=ajax&act=malls&page=2&num=18" parameters:parameters
+    [client postPath:@"index.php?mod=ajax&act=malls&page=1&num=18" parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 NSLog(@"%@", responseObject);
                  NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
-                 self.results=array;
-                 [self.tableView reloadData];
+                 self.results=[NSMutableArray arrayWithArray:array];
+                 [self.moreBrandPullTableView reloadData];
                  [self.HUD removeFromSuperview];
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -167,6 +176,41 @@
 {
     return 1;
 }
+
+- (void) loadMoreDataToTable
+{
+    self.page=self.page+1;
+    NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    NSDictionary *parameters = @{@"page": [ NSString stringWithFormat:@"%i",self.page], @"num" : @"9"};
+    
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
+    NSLog(@"%@", [NSString stringWithFormat:@"index.php?mod=ajax&act=malls&page=%i&num=18", self.page]);
+    [client postPath:[NSString stringWithFormat:@"index.php?mod=ajax&act=malls&page=%i&num=18", self.page] parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
+                 [self.results addObjectsFromArray:array];
+                 
+                 // 2.2秒后刷新表格UI
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                     // 刷新表格
+                     [self.moreBrandPullTableView reloadData];
+                     
+                     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+                     [self.moreBrandPullTableView footerEndRefreshing];
+                 });
+             }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"%@", error);
+                 //[self.HUD removeFromSuperview];
+             }];
+    
+    //self.moreBrandPullTableView.pullTableIsLoadingMore = NO;
+}
+
+
 
 /*
 #pragma mark - Navigation
