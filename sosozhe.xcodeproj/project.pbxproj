@@ -99,6 +99,8 @@
 		03B51FC918FD7EA900F862E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B51FAB18FD7EA900F862E1 /* UIKit.framework */; };
 		03B51FD118FD7EA900F862E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03B51FCF18FD7EA900F862E1 /* InfoPlist.strings */; };
 		03B51FD318FD7EA900F862E1 /* sosozheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B51FD218FD7EA900F862E1 /* sosozheTests.m */; };
+		03C1C2C51A2CA65600B2BD66 /* MemberOnlyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C1C2C31A2CA65600B2BD66 /* MemberOnlyTableViewCell.m */; };
+		03C1C2C61A2CA65600B2BD66 /* MemberOnlyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03C1C2C41A2CA65600B2BD66 /* MemberOnlyTableViewCell.xib */; };
 		03CADD0E1A21DEF60054BDCA /* HotBrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CADD0C1A21DEF60054BDCA /* HotBrandTableViewCell.m */; };
 		03CADD0F1A21DEF60054BDCA /* HotBrandTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03CADD0D1A21DEF60054BDCA /* HotBrandTableViewCell.xib */; };
 		03F1656A1901830F0047D17E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F165691901830F0047D17E /* MBProgressHUD.m */; };
@@ -121,6 +123,7 @@
 		03FB7CF71A222B3E006BDAF5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03FB7CF61A222B3E006BDAF5 /* MapKit.framework */; };
 		03FC3A011A1AD4CC00F6504D /* SearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FC39FF1A1AD4CC00F6504D /* SearchResultTableViewCell.m */; };
 		03FC3A021A1AD4CC00F6504D /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03FC3A001A1AD4CC00F6504D /* SearchResultTableViewCell.xib */; };
+		03FC54C71A2BF7C300D1805D /* MemberOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FC54C61A2BF7C300D1805D /* MemberOnlyViewController.m */; };
 		9AC91AF80AE74C3CA5A68D0A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BBFC5D6C98494FB4997A06 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -251,6 +254,9 @@
 		03B51FCE18FD7EA900F862E1 /* sosozheTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sosozheTests-Info.plist"; sourceTree = "<group>"; };
 		03B51FD018FD7EA900F862E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		03B51FD218FD7EA900F862E1 /* sosozheTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sosozheTests.m; sourceTree = "<group>"; };
+		03C1C2C21A2CA65600B2BD66 /* MemberOnlyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberOnlyTableViewCell.h; sourceTree = "<group>"; };
+		03C1C2C31A2CA65600B2BD66 /* MemberOnlyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberOnlyTableViewCell.m; sourceTree = "<group>"; };
+		03C1C2C41A2CA65600B2BD66 /* MemberOnlyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberOnlyTableViewCell.xib; sourceTree = "<group>"; };
 		03CADD0B1A21DEF60054BDCA /* HotBrandTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotBrandTableViewCell.h; sourceTree = "<group>"; };
 		03CADD0C1A21DEF60054BDCA /* HotBrandTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotBrandTableViewCell.m; sourceTree = "<group>"; };
 		03CADD0D1A21DEF60054BDCA /* HotBrandTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotBrandTableViewCell.xib; sourceTree = "<group>"; };
@@ -293,6 +299,8 @@
 		03FC39FE1A1AD4CC00F6504D /* SearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultTableViewCell.h; sourceTree = "<group>"; };
 		03FC39FF1A1AD4CC00F6504D /* SearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTableViewCell.m; sourceTree = "<group>"; };
 		03FC3A001A1AD4CC00F6504D /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
+		03FC54C51A2BF7C300D1805D /* MemberOnlyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemberOnlyViewController.h; path = ../MemberOnlyViewController.h; sourceTree = "<group>"; };
+		03FC54C61A2BF7C300D1805D /* MemberOnlyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemberOnlyViewController.m; path = ../MemberOnlyViewController.m; sourceTree = "<group>"; };
 		A50530DD1AFA4FC284870635 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B1BBFC5D6C98494FB4997A06 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -460,40 +468,45 @@
 		03B51FAD18FD7EA900F862E1 /* sosozhe */ = {
 			isa = PBXGroup;
 			children = (
-				030962F61A237C08006E2A77 /* MJRefresh */,
-				03FB7CC41A222B27006BDAF5 /* SDWebImage */,
-				03F165671901830F0047D17E /* MBProgress */,
-				032D740D18FEDF9100FA8284 /* SGFocusImage */,
 				03B51FB618FD7EA900F862E1 /* AppDelegate.h */,
-				03B51FB718FD7EA900F862E1 /* AppDelegate.m */,
-				03B51FB918FD7EA900F862E1 /* Main.storyboard */,
+				0327028B19027E880049827A /* BrandDetailViewController.h */,
+				03270291190283150049827A /* BrandView.h */,
+				0309630F1A238228006E2A77 /* Constant.h */,
+				032D740A18FEDC4000FA8284 /* CustomTextField.h */,
+				036DEC5619002F48003F0F45 /* Header.h */,
+				03CADD0B1A21DEF60054BDCA /* HotBrandTableViewCell.h */,
+				032D740218FECA0D00FA8284 /* IndexViewController.h */,
+				03FC54C51A2BF7C300D1805D /* MemberOnlyViewController.h */,
+				0328574E1903DF2A0094517B /* MoreBrandViewController.h */,
+				031EFEA119055CC900A165C7 /* MyAccountViewController.h */,
+				03FC39FE1A1AD4CC00F6504D /* SearchResultTableViewCell.h */,
+				030366AB1A09A56C001BE107 /* SearchResultViewController.h */,
 				03B51FBC18FD7EA900F862E1 /* ViewController.h */,
+				03B51FB718FD7EA900F862E1 /* AppDelegate.m */,
+				0327028C19027E880049827A /* BrandDetailViewController.m */,
+				03270292190283150049827A /* BrandView.m */,
+				032D740B18FEDC4000FA8284 /* CustomTextField.m */,
+				03CADD0C1A21DEF60054BDCA /* HotBrandTableViewCell.m */,
+				032D740318FECA0D00FA8284 /* IndexViewController.m */,
+				03FC54C61A2BF7C300D1805D /* MemberOnlyViewController.m */,
+				0328574F1903DF2A0094517B /* MoreBrandViewController.m */,
+				031EFEA219055CC900A165C7 /* MyAccountViewController.m */,
+				03FC39FF1A1AD4CC00F6504D /* SearchResultTableViewCell.m */,
+				030366AC1A09A56C001BE107 /* SearchResultViewController.m */,
 				03B51FBD18FD7EA900F862E1 /* ViewController.m */,
 				03B51FBF18FD7EA900F862E1 /* Images.xcassets */,
-				03B51FAE18FD7EA900F862E1 /* Supporting Files */,
-				032D740218FECA0D00FA8284 /* IndexViewController.h */,
-				032D740318FECA0D00FA8284 /* IndexViewController.m */,
-				032D740A18FEDC4000FA8284 /* CustomTextField.h */,
-				032D740B18FEDC4000FA8284 /* CustomTextField.m */,
-				036DEC5619002F48003F0F45 /* Header.h */,
-				0327028B19027E880049827A /* BrandDetailViewController.h */,
-				0327028C19027E880049827A /* BrandDetailViewController.m */,
-				03270291190283150049827A /* BrandView.h */,
-				03270292190283150049827A /* BrandView.m */,
-				0328574E1903DF2A0094517B /* MoreBrandViewController.h */,
-				0328574F1903DF2A0094517B /* MoreBrandViewController.m */,
-				031EFEA119055CC900A165C7 /* MyAccountViewController.h */,
-				031EFEA219055CC900A165C7 /* MyAccountViewController.m */,
-				030366AB1A09A56C001BE107 /* SearchResultViewController.h */,
-				030366AC1A09A56C001BE107 /* SearchResultViewController.m */,
-				03FC39FE1A1AD4CC00F6504D /* SearchResultTableViewCell.h */,
-				03FC39FF1A1AD4CC00F6504D /* SearchResultTableViewCell.m */,
-				03FC3A001A1AD4CC00F6504D /* SearchResultTableViewCell.xib */,
-				03CADD0B1A21DEF60054BDCA /* HotBrandTableViewCell.h */,
-				03CADD0C1A21DEF60054BDCA /* HotBrandTableViewCell.m */,
-				03CADD0D1A21DEF60054BDCA /* HotBrandTableViewCell.xib */,
 				030044001A21F73800E5EAB7 /* BrandView.xib */,
-				0309630F1A238228006E2A77 /* Constant.h */,
+				03CADD0D1A21DEF60054BDCA /* HotBrandTableViewCell.xib */,
+				03FC3A001A1AD4CC00F6504D /* SearchResultTableViewCell.xib */,
+				03B51FB918FD7EA900F862E1 /* Main.storyboard */,
+				03F165671901830F0047D17E /* MBProgress */,
+				030962F61A237C08006E2A77 /* MJRefresh */,
+				03FB7CC41A222B27006BDAF5 /* SDWebImage */,
+				032D740D18FEDF9100FA8284 /* SGFocusImage */,
+				03B51FAE18FD7EA900F862E1 /* Supporting Files */,
+				03C1C2C21A2CA65600B2BD66 /* MemberOnlyTableViewCell.h */,
+				03C1C2C31A2CA65600B2BD66 /* MemberOnlyTableViewCell.m */,
+				03C1C2C41A2CA65600B2BD66 /* MemberOnlyTableViewCell.xib */,
 			);
 			path = sosozhe;
 			sourceTree = "<group>";
@@ -704,6 +717,7 @@
 				032D73F918FEC96000FA8284 /* tab_user_2_s.png in Resources */,
 				032D73EC18FEC96000FA8284 /* tab_index_2.png in Resources */,
 				032D73EF18FEC96000FA8284 /* tab_mall_1_s.png in Resources */,
+				03C1C2C61A2CA65600B2BD66 /* MemberOnlyTableViewCell.xib in Resources */,
 				032D740018FEC96000FA8284 /* top_bg.9.png in Resources */,
 				032D73F718FEC96000FA8284 /* tab_user_1_s.png in Resources */,
 				032D73F618FEC96000FA8284 /* tab_user_1.png in Resources */,
@@ -790,9 +804,11 @@
 				03FB7CF51A222B27006BDAF5 /* UIView+WebCacheOperation.m in Sources */,
 				032D741218FEDF9200FA8284 /* SGFocusImageFrame.m in Sources */,
 				03FB7CF21A222B27006BDAF5 /* UIImage+WebP.m in Sources */,
+				03C1C2C51A2CA65600B2BD66 /* MemberOnlyTableViewCell.m in Sources */,
 				03FB7CEE1A222B27006BDAF5 /* SDWebImagePrefetcher.m in Sources */,
 				03B51FBE18FD7EA900F862E1 /* ViewController.m in Sources */,
 				03FC3A011A1AD4CC00F6504D /* SearchResultTableViewCell.m in Sources */,
+				03FC54C71A2BF7C300D1805D /* MemberOnlyViewController.m in Sources */,
 				032D741318FEDF9200FA8284 /* SGFocusImageItem.m in Sources */,
 				03FB7CE91A222B27006BDAF5 /* SDWebImageCompat.m in Sources */,
 				03FB7CE71A222B27006BDAF5 /* NSData+ImageContentType.m in Sources */,
