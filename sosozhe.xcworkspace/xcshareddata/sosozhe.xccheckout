@@ -10,29 +10,29 @@
 	<string>sosozhe</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5C4413F7-953E-4524-8350-F7EDFAA91B98</key>
+		<key>CFE2969DBAEE5BC2DB567ADFA532990B7EFA6DC8</key>
 		<string>https://github.com/seedman666/sosozhe.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>sosozhe.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5C4413F7-953E-4524-8350-F7EDFAA91B98</key>
+		<key>CFE2969DBAEE5BC2DB567ADFA532990B7EFA6DC8</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/seedman666/sosozhe.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5C4413F7-953E-4524-8350-F7EDFAA91B98</string>
+	<string>CFE2969DBAEE5BC2DB567ADFA532990B7EFA6DC8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5C4413F7-953E-4524-8350-F7EDFAA91B98</string>
+			<string>CFE2969DBAEE5BC2DB567ADFA532990B7EFA6DC8</string>
 			<key>IDESourceControlWCCName</key>
 			<string>sosozhe</string>
 		</dict>

@@ -7,3 +7,5 @@
 //
 
 #define SEARCH_PAGE_SIZE 10
+
+#define SECURE_KEY "uuN5wmUuRsDe6"

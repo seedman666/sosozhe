@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface MyAccountViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+@property (weak, nonatomic) IBOutlet UIView *qiandaoView;
+@property (weak, nonatomic) IBOutlet UIView *yaoqingView;
+@property (weak, nonatomic) IBOutlet UIView *taobaoOrderView;
+@property (weak, nonatomic) IBOutlet UIView *paipaiOrderView;
+@property (weak, nonatomic) IBOutlet UIView *shouruListView;
+@property (weak, nonatomic) IBOutlet UIView *qiandaoListView;
 
 @end

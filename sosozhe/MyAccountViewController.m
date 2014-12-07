@@ -7,8 +7,17 @@
 //
 
 #import "MyAccountViewController.h"
+#import <AFNetworking.h>
+#import "MBProgressHUD.h"
+#import "LoginChooseViewController.h"
+#import "MD5Util.h"
+#import "LoginUtil.h"
+#import "CommonUtil.h"
+#import "Constant.h"
 
-@interface MyAccountViewController ()
+@interface MyAccountViewController ()<MBProgressHUDDelegate>
+
+@property MBProgressHUD *HUD;
 
 @end
 
@@ -27,6 +36,102 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UITapGestureRecognizer *tapGesture1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(checkInClick:)];
+    [self.qiandaoView addGestureRecognizer:tapGesture1];
+    
+    UITapGestureRecognizer *tapGesture2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addFriend:)];
+    [self.yaoqingView addGestureRecognizer:tapGesture2];
+    
+    [self checkLoginStatus];
+    
+}
+
+-(void) addFriend:(UITapGestureRecognizer *) gesture{
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+   
+    [CommonUtil inviteFriend:self];
+    
+}
+
+-(void) checkInClick:(UITapGestureRecognizer *)gesture{
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    
+    [CommonUtil checkIn:self.view];
+    
+}
+
+-(void) checkLoginStatus
+{
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    self.HUD.delegate = self;
+    self.HUD.labelText = @"正在加载数据";
+    self.HUD.dimBackground = YES;
+    [self.HUD show:YES];
+
+    UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
+    NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
+    NSString *token=[MD5Util md5:[NSString stringWithFormat:@"%@%s", timestamp, SECURE_KEY ] ];
+    NSString *urlStr=[NSString stringWithFormat:@"%@%@%@%@", @"index.php?mod=ajax&act=userinfo&timestamp=",timestamp,@"&token=",token ];
+    NSLog(@"%@", urlStr);
+    
+    NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
+    
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://sosozhe.com"]];
+    NSLog(@"COOKIE:%@", cookies);
+    
+    [client postPath:urlStr parameters:nil
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 [self.HUD removeFromSuperview];
+                 NSLog(@"%@", responseObject);
+                 NSString* status = [responseObject objectForKey:@"status"];
+                 
+                 if ([status intValue]==101) {
+                     [LoginUtil setLogin:false];
+                     [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+                 }else{
+                     [LoginUtil setLogin:true];
+                     [self initUserInfo:responseObject];
+                 }
+             }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 [self.HUD removeFromSuperview];
+                 NSLog(@"%@", error);
+                 
+             }
+     ];
+}
+
+-(void) initUserInfo : (NSDictionary *)info{
+    NSDictionary *dict =[info objectForKey:@"result"];
+    NSString *userName= [dict objectForKey:@"name"];
+    self.userNameLabel.text=userName;
+    
+    NSString *avatar = [dict objectForKey:@"avatar"];
+    NSString *avatarUrl=nil;
+    if([avatar rangeOfString:@"http://"].location==NSNotFound){
+        avatarUrl = [NSString stringWithFormat:@"http://www.sosozhe.com/%@", avatar];
+    }else{
+        avatarUrl=avatar;
+    }
+    NSURL *url=[NSURL URLWithString:avatarUrl];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    self.avatarImageView.image=image;
+    
+    NSString *money=[dict objectForKey:@"money"];
+    self.moneyLabel.text=[NSString stringWithFormat:@"%@元", money];
+    
 }
 
 - (void)didReceiveMemoryWarning

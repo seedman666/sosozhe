@@ -12,6 +12,7 @@
 #import "MemberOnlyTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "MJRefresh.h"
+#import "Constant.h"
 
 @interface MemberOnlyViewController ()
 
@@ -68,7 +69,7 @@
     
     UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
     NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
-    NSString *token=[self md5:[NSString stringWithFormat:@"%@%@", timestamp, @"uuN5wmUuRsDe6" ] ];
+    NSString *token=[self md5:[NSString stringWithFormat:@"%@%s", timestamp, SECURE_KEY ] ];
     NSString *urlStr=[NSString stringWithFormat:@"%@%li%@%li%@%@%@%@", @"index.php?mod=ajax&act=hyzx&page_no=",self.page, @"&page_size=10&cateid=",self.type,@"&timestamp=",timestamp,@"&token=",token ];
     NSLog(@"%@", urlStr);
     
@@ -143,7 +144,7 @@
     
     UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
     NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
-    NSString *token=[self md5:[NSString stringWithFormat:@"%@%@", timestamp, @"uuN5wmUuRsDe6" ] ];
+    NSString *token=[self md5:[NSString stringWithFormat:@"%@%s", timestamp, SECURE_KEY ] ];
     NSString *urlStr=[NSString stringWithFormat:@"%@%li%@%@%@%@", @"index.php?mod=ajax&act=hyzx&page_no=1&page_size=10&cateid=",type,@"&timestamp=",timestamp,@"&token=",token ];
     NSLog(@"%@", urlStr);
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];

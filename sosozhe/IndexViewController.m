@@ -15,9 +15,14 @@
 #import "BrandView.h"
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
+#import "LoginUtil.h"
+#import "MD5Util.h"
+#import "CommonUtil.h"
+#import "Constant.h"
 
 @interface IndexViewController ()<MBProgressHUDDelegate>
 @property MBProgressHUD *HUD;
+@property BOOL isLogin;
 @end
 
 @implementation IndexViewController
@@ -35,6 +40,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [LoginUtil checkLoginAsyn];
     [[self searchText] setReturnKeyType:UIReturnKeyGo];
     [[self searchText] setDelegate:self];
     [[self indexTabBar] setFinishedSelectedImage:[UIImage imageNamed:@"tab_index_2_s"] withFinishedUnselectedImage:[UIImage imageNamed:@"tab_index_1_s"]];
@@ -138,15 +144,14 @@
 }
 
 - (void)vipClick:(UITapGestureRecognizer *)gesture{
-    NSLog(@"%@", gesture.view);
-    [self performSegueWithIdentifier:@"brandDetailWebView" sender:self];
+    AppDelegate *thisAppDelegate = [[UIApplication sharedApplication] delegate];
+    [(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:1];
 }
 
 -(void) brandViewClick:(UITapGestureRecognizer *) gesture{
     [self performSegueWithIdentifier:@"brandDetailWebView" sender:self];
     BrandView *view=(BrandView *)gesture.view;
     NSString *url=view.url;
-    //NSDictionary *dicts = [NSDictionary dictionaryWithObjectsAndKeys:@"url",url, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewParamNotification" object:url];
     
 }
@@ -157,11 +162,20 @@
 }
 
 - (void)checkInClick:(UITapGestureRecognizer *)gesture{
-    NSLog(@"%@", gesture.view);
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    [CommonUtil checkIn:self.view];
+    
 }
 
 - (void)addFriendClick:(UITapGestureRecognizer *)gesture{
-    NSLog(@"%@", gesture.view);
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    [CommonUtil inviteFriend:self];
 }
 
 - (void)didReceiveMemoryWarning
