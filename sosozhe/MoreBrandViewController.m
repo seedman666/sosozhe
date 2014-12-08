@@ -13,6 +13,7 @@
 #import <math.h>
 #import "MBProgressHUD.h"
 #import "MJRefresh.h"
+#import "PassValueUtil.h"
 
 @interface MoreBrandViewController ()<MBProgressHUDDelegate>
 @property NSMutableArray *results;
@@ -35,6 +36,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    [[self moreBrandBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"tab_mall_2_s"] withFinishedUnselectedImage:[UIImage imageNamed:@"tab_mall_1_s"]];
     
     [[self searchText] setReturnKeyType:UIReturnKeyGo];
     [[self searchText] setDelegate:self];
@@ -101,11 +103,9 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     if (textField == [self searchText]) {
-        
+        [PassValueUtil setSearchText:textField.text];
         [textField resignFirstResponder];
         [self performSegueWithIdentifier:@"SearchViewIde" sender:self];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"searchResultParamNotification" object:textField.text];
         
     }
     return YES;
@@ -143,11 +143,11 @@
 {
     NSDictionary *dict=[self.results objectAtIndex:index];
     NSString *imgUrl=[dict objectForKey:@"img"];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgUrl]]];
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"BrandView" owner:self options:nil];
     BrandView *view=[nib objectAtIndex:0];
-    if (image) {
-        view.imageView.image=image;
+    if (imgUrl.length > 0) {
+        view.brandEgoImageVIew.imageURL=[NSURL URLWithString:imgUrl];
+        
     }
     view.fanliLabel.text=[NSString stringWithFormat:@"最高返利：%@", [dict objectForKey:@"fan"]];
     NSString *url=[dict objectForKey:@"url"];

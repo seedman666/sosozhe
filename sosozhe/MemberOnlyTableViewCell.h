@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOImageView.h"
 
 @interface MemberOnlyTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *discountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scorelabel;
+@property (weak, nonatomic) IBOutlet EGOImageView *iconView;
 
 @end

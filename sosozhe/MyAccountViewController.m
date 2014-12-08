@@ -14,6 +14,7 @@
 #import "LoginUtil.h"
 #import "CommonUtil.h"
 #import "Constant.h"
+#import "PassValueUtil.h"
 
 @interface MyAccountViewController ()<MBProgressHUDDelegate>
 
@@ -36,14 +37,53 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    [[self myAccountBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"tab_user_2_s"] withFinishedUnselectedImage:[UIImage imageNamed:@"tab_user_1_s"]];
+    
     UITapGestureRecognizer *tapGesture1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(checkInClick:)];
     [self.qiandaoView addGestureRecognizer:tapGesture1];
     
     UITapGestureRecognizer *tapGesture2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addFriend:)];
     [self.yaoqingView addGestureRecognizer:tapGesture2];
     
+    UITapGestureRecognizer *tapGesture3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showShouRu:)];
+    [self.shouruListView addGestureRecognizer:tapGesture3];
+    
+    UITapGestureRecognizer *tapGesture4=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showCheckIn:)];
+    [self.qiandaoListView addGestureRecognizer:tapGesture4];
+
+    [self.msgButton addTarget:self action:@selector(showMsg) forControlEvents:UIControlEventTouchDown];
+    
     [self checkLoginStatus];
     
+}
+
+
+-(void) showMsg{
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    [PassValueUtil setListType:@"msg"];
+    [self performSegueWithIdentifier:@"ShowListViewControllerId" sender:self];
+}
+
+-(void) showCheckIn:(UITapGestureRecognizer *) gesture{
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    [PassValueUtil setListType:@"checkin"];
+    [self performSegueWithIdentifier:@"ShowListViewControllerId" sender:self];
+}
+
+-(void) showShouRu:(UITapGestureRecognizer *) gesture{
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    [PassValueUtil setListType:@"income"];
+    [self performSegueWithIdentifier:@"ShowListViewControllerId" sender:self];
+
 }
 
 -(void) addFriend:(UITapGestureRecognizer *) gesture{

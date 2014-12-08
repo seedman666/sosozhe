@@ -13,9 +13,11 @@
 #import "SearchResultTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
+#import "EGOImageView.h"
 #import "MJRefresh.h"
 #import "MD5Util.h"
 #import "Constant.h"
+#import "PassValueUtil.h"
 
 @interface SearchResultViewController ()<MBProgressHUDDelegate>
 @property NSMutableArray *searchResult;
@@ -29,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationHandler:) name:@"searchResultParamNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationHandler:) name:@"searchResultParamNotification" object:nil];
     [self searchResultPullTableView].dataSource=self;
     [self searchResultPullTableView].delegate=self;
     
@@ -38,57 +40,69 @@
     
     [self.searchResultPullTableView addFooterWithTarget:self action:@selector(loadMoreDataToTable)];
     
-}
-
-
--(void) backButtonDown{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
--(void) notificationHandler:(NSNotification *) notification{
-    
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
     self.HUD.delegate = self;
     self.HUD.labelText = @"正在加载数据";
     self.HUD.dimBackground = YES;
     [self.HUD show:YES];
-
     
-    self.searchText = [notification object];
-    UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
-    NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
-    NSString *token=[MD5Util md5:[NSString stringWithFormat:@"%@%s", timestamp, SECURE_KEY ] ];
-    NSString *urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@", @"index.php?mod=ajax&act=search&keyword=",self.searchText,@"&page_no=1&page_size=10&type=1&timestamp=",timestamp,@"&token=",token ];
-    NSLog(@"%@", urlStr);
-    
+    self.page=0;
+    self.searchText= [PassValueUtil searchText];
     self.searchTextArea.text=self.searchText;
-    
-    NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
-    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
-    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    [client setDefaultHeader:@"Accept" value:@"application/json"];
-    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
-    
-    [client postPath:urlStr parameters:nil
-             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 [self.HUD removeFromSuperview];
-                 
-                 NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
-                 self.searchResult = [NSMutableArray arrayWithArray:array];
-                 
-                 [[self searchResultPullTableView] reloadData];
-             }
-             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 [self.HUD removeFromSuperview];
-                 NSLog(@"%@", error);
-                 
-             }];
-    
-    
-    
+    self.searchText = [self.searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    self.searchResult = [NSMutableArray arrayWithArray:nil];
+    [self loadMoreDataToTable];
 }
+
+
+-(void) backButtonDown{
+    [self dismissModalViewControllerAnimated:YES];
+}
+//
+//
+//-(void) notificationHandler:(NSNotification *) notification{
+//    
+//    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+//    [self.view addSubview:self.HUD];
+//    self.HUD.delegate = self;
+//    self.HUD.labelText = @"正在加载数据";
+//    self.HUD.dimBackground = YES;
+//    [self.HUD show:YES];
+//
+//    
+//    self.searchText = [notification object];
+//    UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
+//    NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
+//    NSString *token=[MD5Util md5:[NSString stringWithFormat:@"%@%s", timestamp, SECURE_KEY ] ];
+//    NSString *urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@", @"index.php?mod=ajax&act=search&keyword=",self.searchText,@"&page_no=1&page_size=5&type=1&timestamp=",timestamp,@"&token=",token ];
+//    self.searchTextArea.text=self.searchText;
+//    
+//    NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
+//    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+//    
+//    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+//    [client setDefaultHeader:@"Accept" value:@"application/json"];
+//    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
+//    
+//    [client postPath:urlStr parameters:nil
+//             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                 [self.HUD removeFromSuperview];
+//                 
+//                 NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
+//                 self.searchResult = [NSMutableArray arrayWithArray:array];
+//                 [[self searchResultPullTableView] reloadData];
+//                                  
+//             }
+//             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                 [self.HUD removeFromSuperview];
+//                 NSLog(@"%@", error);
+//                 
+//             }];
+//    
+//    
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -101,14 +115,18 @@
     SearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchResultTableViewCell" owner:self options:nil] lastObject];
-        
     }
     NSUInteger row = [indexPath row];
     NSDictionary *dict=[self.searchResult objectAtIndex:row];
     
     NSURL *url=[NSURL URLWithString:[dict objectForKey:@"pic_url"]];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    cell.imageView.image=image;
+    
+    cell.egoImageView.imageURL=url;
+    
+//    EGOImageView *imageView = [[EGOImageView alloc] initWithFrame:cell.asyncImageView.frame];
+//    imageView.imageURL=url;
+//    [cell.asyncImageView addSubview:imageView];
+//    [cell.asyncImageView loadImageFromURL:url];
     
     cell.titleLabel.numberOfLines=2;
     cell.titleLabel.text=[dict objectForKey:@"title"];
@@ -121,31 +139,17 @@
     }
     NSNumber *sales=[dict objectForKey:@"volume"];
     cell.saleLabel.text=[NSString stringWithFormat:@"最近售出：%@", sales];
-//    cell.imageView.image = image;
-    //cell.detailTextLabel.text = [dict objectForKey:@"title"];
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSUInteger row = [indexPath row];
-//    // 列寬
-//    CGFloat contentWidth = self.tableView.frame.size.width;
-//    // 用何種字體進行顯示
-//    UIFont *font = [UIFont systemFontOfSize:14];
-//    // 該行要顯示的內容
-//    NSDictionary *dict=[self.searchResult objectAtIndex:row];
-//    NSString *content = [dict objectForKey:@"title"];
-//    // 計算出顯示完內容需要的最小尺寸
-//    CGSize size = [content sizeWithFont:font constrainedToSize:CGSizeMake(contentWidth, 1000.0f) lineBreakMode:UILineBreakModeWordWrap];
-//    // 這裏返回需要的高度
-//    return size.height+20;
     return 95;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%lu", (unsigned long)self.searchResult.count);
     return  [[self searchResult]count];
 }
 
@@ -160,7 +164,6 @@
     NSString *url=[dict objectForKey:@"click_url"];
     
     [self performSegueWithIdentifier:@"itemViewDetailId" sender:self];
-    //NSDictionary *dicts = [NSDictionary dictionaryWithObjectsAndKeys:@"url",url, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewParamNotification" object:url];
 }
 
@@ -173,7 +176,6 @@
     NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
     NSString *token=[MD5Util md5:[NSString stringWithFormat:@"%@%s", timestamp, SECURE_KEY ] ];
     NSString *urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=search&keyword=",self.searchText,@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&type=1&timestamp=",timestamp,@"&token=",token ];
-    NSLog(@"%@", urlStr);
     
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -184,16 +186,19 @@
     
     [client postPath:urlStr parameters:nil
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                // [self.HUD removeFromSuperview];
                  NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
                  [self.searchResult addObjectsFromArray:array];
                  
                  // 2.2秒后刷新表格UI
                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                     [self.HUD removeFromSuperview];
                      // 刷新表格
                      [self.searchResultPullTableView reloadData];
                      
                      // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
                      [self.searchResultPullTableView footerEndRefreshing];
+                     
                  });
                  
              }

@@ -1,16 +1,14 @@
 //
-//  SearchResultTableViewCell.m
+//  CheckInHistoryTableViewCell.m
 //  sosozhe
 //
-//  Created by seed on 14-11-18.
+//  Created by seed on 14-12-8.
 //  Copyright (c) 2014年 sosozhe. All rights reserved.
 //
 
-#import "SearchResultTableViewCell.h"
-#import "EGOImageView.h"
-#import <QuartzCore/QuartzCore.h>
+#import "CheckInHistoryTableViewCell.h"
 
-@implementation SearchResultTableViewCell
+@implementation CheckInHistoryTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -21,7 +19,5 @@
 
     // Configure the view for the selected state
 }
-
-
 
 @end

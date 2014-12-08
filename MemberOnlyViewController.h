@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *button11;
 
 - (IBAction)buttonDown:(id)sender;
+@property (weak, nonatomic) IBOutlet UITabBarItem *memberOnlyBarItem;
 
 
 @end

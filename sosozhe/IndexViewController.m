@@ -19,6 +19,7 @@
 #import "MD5Util.h"
 #import "CommonUtil.h"
 #import "Constant.h"
+#import "PassValueUtil.h"
 
 @interface IndexViewController ()<MBProgressHUDDelegate>
 @property MBProgressHUD *HUD;
@@ -40,10 +41,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+//    [[self indexTabBar] setFinishedSelectedImage:[UIImage imageNamed:@"tab_index_2_s"] withFinishedUnselectedImage:[UIImage imageNamed:@"tab_index_1_s"]];
     [LoginUtil checkLoginAsyn];
     [[self searchText] setReturnKeyType:UIReturnKeyGo];
     [[self searchText] setDelegate:self];
     [[self indexTabBar] setFinishedSelectedImage:[UIImage imageNamed:@"tab_index_2_s"] withFinishedUnselectedImage:[UIImage imageNamed:@"tab_index_1_s"]];
+    
     SGFocusImageItem *item1 = [[SGFocusImageItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"banner1"] tag:0];
     SGFocusImageItem *item2 = [[SGFocusImageItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"banner3"] tag:1];
     SGFocusImageItem *item3 = [[SGFocusImageItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"banner3"] tag:2];
@@ -197,13 +201,14 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     if (textField == [self searchText]) {
-        
+        [PassValueUtil setSearchText:textField.text];
         [textField resignFirstResponder];
         [self performSegueWithIdentifier:@"SearchViewIde" sender:self];
 //        AppDelegate *thisAppDelegate = [[UIApplication sharedApplication] delegate];
 //        [(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:2];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"searchResultParamNotification" object:textField.text];
+        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"searchResultParamNotification" object:textField.text];
         
     }
     return YES;

@@ -14,5 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet CustomTextField *searchText;
 @property (weak, nonatomic) IBOutlet UITableView *moreBrandPullTableView;
+@property (weak, nonatomic) IBOutlet UITabBarItem *moreBrandBarItem;
 
 @end

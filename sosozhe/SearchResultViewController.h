@@ -10,9 +10,6 @@
 
 @interface SearchResultViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *searchResultPullTableView;
-@property (weak, nonatomic) IBOutlet UITabBarItem *shouyeBar;
-@property (weak, nonatomic) IBOutlet UITabBarItem *taobaofanliBar;
-@property (weak, nonatomic) IBOutlet UITabBarItem *myAccountBar;
 
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UILabel *searchTextArea;

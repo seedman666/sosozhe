@@ -18,5 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIView *paipaiOrderView;
 @property (weak, nonatomic) IBOutlet UIView *shouruListView;
 @property (weak, nonatomic) IBOutlet UIView *qiandaoListView;
+@property (weak, nonatomic) IBOutlet UITabBarItem *myAccountBarItem;
+@property (weak, nonatomic) IBOutlet UIView *mallOrderView;
+@property (weak, nonatomic) IBOutlet UIButton *msgButton;
 
 @end

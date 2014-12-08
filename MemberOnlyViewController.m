@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "MJRefresh.h"
 #import "Constant.h"
+#import "PassValueUtil.h"
 
 @interface MemberOnlyViewController ()
 
@@ -27,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    [[self memberOnlyBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"tab_tao_2_s"] withFinishedUnselectedImage:[UIImage imageNamed:@"tab_tao_1_s"]];
+    
     [[self searchText] setReturnKeyType:UIReturnKeyGo];
     [[self searchText] setDelegate:self];
     
@@ -35,13 +38,13 @@
     
     [self.tagProductShowTableView addFooterWithTarget:self action:@selector(loadMoreDataToTable)];
     self.page=1;
+    [self.button0 setBackgroundColor:[UIColor grayColor]];
     
     [self requestTagProducts:0];
     
 }
 
 - (IBAction)buttonDown:(id)sender {
-    NSLog(@"%@", sender);
     [self.button0 setBackgroundColor:[UIColor clearColor]];
     [self.button1 setBackgroundColor:[UIColor clearColor]];
     [self.button2 setBackgroundColor:[UIColor clearColor]];
@@ -183,8 +186,7 @@
     NSLog(@"%@", dict);
     
     NSURL *url=[NSURL URLWithString:[dict objectForKey:@"pic_url"]];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    cell.iconView.image=image;
+    cell.iconView.imageURL=url;
     
     cell.titleLabel.numberOfLines=2;
     cell.titleLabel.text=[dict objectForKey:@"title"];
@@ -221,13 +223,9 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     if (textField == [self searchText]) {
-        
+        [PassValueUtil setSearchText:textField.text];
         [textField resignFirstResponder];
         [self performSegueWithIdentifier:@"SearchViewIde" sender:self];
-        //        AppDelegate *thisAppDelegate = [[UIApplication sharedApplication] delegate];
-        //        [(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:2];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"searchResultParamNotification" object:textField.text];
         
     }
     return YES;
