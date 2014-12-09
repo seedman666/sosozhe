@@ -53,10 +53,46 @@
 
     [self.msgButton addTarget:self action:@selector(showMsg) forControlEvents:UIControlEventTouchDown];
     
+    UITapGestureRecognizer *tapGesture5=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showTaoBaoOrder:)];
+    [self.taobaoOrderView addGestureRecognizer:tapGesture5];
+
+    UITapGestureRecognizer *tapGesture6=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showPaiPaiOrder:)];
+    [self.paipaiOrderView addGestureRecognizer:tapGesture6];
+
+    UITapGestureRecognizer *tapGesture7=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showMallOrder:)];
+    [self.mallOrderView addGestureRecognizer:tapGesture7];
+
+    
     [self checkLoginStatus];
     
 }
 
+-(void) showMallOrder :(UITapGestureRecognizer *) gesture{
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    [PassValueUtil setListType:@"mallOrder"];
+    [self performSegueWithIdentifier:@"ShowListViewControllerId" sender:self];
+}
+
+-(void) showPaiPaiOrder :(UITapGestureRecognizer *) gesture{
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    [PassValueUtil setListType:@"paipaiOrder"];
+    [self performSegueWithIdentifier:@"ShowListViewControllerId" sender:self];
+}
+
+-(void) showTaoBaoOrder :(UITapGestureRecognizer *) gesture{
+    if (!LoginUtil.isLogin) {
+        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        return;
+    }
+    [PassValueUtil setListType:@"taobaoOrder"];
+    [self performSegueWithIdentifier:@"ShowListViewControllerId" sender:self];
+}
 
 -(void) showMsg{
     if (!LoginUtil.isLogin) {

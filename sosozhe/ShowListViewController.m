@@ -10,6 +10,7 @@
 #import "IncomeTableViewCell.h"
 #import "CheckInHistoryTableViewCell.h"
 #import "MessageTableViewCell.h"
+#import "OrderTableViewCell.h"
 #import "PassValueUtil.h"
 #import "MD5Util.h"
 #import "Constant.h"
@@ -79,9 +80,19 @@ static NSString *TYPE;
         label2.font=[UIFont systemFontOfSize:13];
         [self.headerView addSubview:label2];
         
-        self.titleLabel.text=@"我的签到明细";
-
         self.titleLabel.text=@"站内消息";
+    }else if ([[PassValueUtil listType] isEqualToString:@"taobaoOrder"]){
+        self.showListTableView.frame=CGRectMake(0, self.headerView.frame.origin.y, 320, self.showListTableView.frame.size.height + self.headerView.frame.size.height);
+        
+        self.titleLabel.text=@"我的淘宝,天猫订单";
+    }else if ([[PassValueUtil listType] isEqualToString:@"paipaiOrder"]){
+        self.showListTableView.frame=CGRectMake(0, self.headerView.frame.origin.y, 320, self.showListTableView.frame.size.height + self.headerView.frame.size.height);
+        
+        self.titleLabel.text=@"我的拍拍订单";
+    }else if ([[PassValueUtil listType] isEqualToString:@"mallOrder"]){
+        self.showListTableView.frame=CGRectMake(0, self.headerView.frame.origin.y, 320, self.showListTableView.frame.size.height + self.headerView.frame.size.height);
+        
+        self.titleLabel.text=@"我的商城订单";
     }
     
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -90,8 +101,15 @@ static NSString *TYPE;
     self.HUD.dimBackground = YES;
     [self.HUD show:YES];
     
+    [self.showListTableView addHeaderWithTarget:self action:@selector(refreshData)];
     [self.showListTableView addFooterWithTarget:self action:@selector(loadMoreDataToTable)];
     
+    [self loadMoreDataToTable];
+}
+
+-(void) refreshData{
+    self.page=0;
+    self.results =[[NSMutableArray alloc] init];
     [self loadMoreDataToTable];
 }
 
@@ -118,6 +136,12 @@ static NSString *TYPE;
         urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=qdmingxi",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
     }else if ([[PassValueUtil listType] isEqualToString:@"msg"]){
         urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=get_msg",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+    }else if ([[PassValueUtil listType] isEqualToString:@"taobaoOrder"]){
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=taobao",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+    }else if ([[PassValueUtil listType] isEqualToString:@"paipaiOrder"]){
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=paipai",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+    }else if ([[PassValueUtil listType] isEqualToString:@"mallOrder"]){
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=mall",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
     }
     
     [client postPath:urlStr parameters:nil
@@ -138,6 +162,7 @@ static NSString *TYPE;
                      
                      // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
                      [self.showListTableView footerEndRefreshing];
+                     [self.showListTableView headerEndRefreshing];
                      
                  });
                  
@@ -204,8 +229,86 @@ static NSString *TYPE;
             cell.detailLabel.text=[dict objectForKey:@"content"];
         }
         return cell;
+    }else if ([[PassValueUtil listType] isEqualToString:@"taobaoOrder"]){
+        static NSString *CellWithIdentifier = @"OrderTableViewCell";
+        OrderTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:CellWithIdentifier owner:self options:nil] lastObject];
+            NSUInteger row = [indexPath row];
+            NSDictionary *dict=[self.results objectAtIndex:row];
+            cell.orderTimeLabel.text=[NSString stringWithFormat:@"跟单时间：%@", [dict objectForKey:@"pay_time"]]  ;
+            cell.orderIdLabel.text=[NSString stringWithFormat:@"订单号：%@", [dict objectForKey:@"trade_id"]];
+            NSString *picUrl=[dict objectForKey:@"pic_url"];
+            if (picUrl != [NSNull null] && [picUrl rangeOfString:@"http://"].location != NSNotFound) {
+                cell.productImageView.imageURL = [NSURL URLWithString:[dict objectForKey:@"pic_url"]];
+            }
+            
+            cell.productDetailLabel.numberOfLines=0;
+            cell.productDetailLabel.text=[dict objectForKey:@"item_title"];
+            cell.productMoneyLabel.text=[NSString stringWithFormat:@"￥%@", [dict objectForKey:@"pay_price"]];
+            cell.fanLabel.text=[NSString stringWithFormat:@"返%@集分宝", [dict objectForKey:@"jifenbao"]];
+            
+        }
+        return cell;
+    }else if ([[PassValueUtil listType] isEqualToString:@"paipaiOrder"]){
+        static NSString *CellWithIdentifier = @"OrderTableViewCell";
+        OrderTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:CellWithIdentifier owner:self options:nil] lastObject];
+            NSUInteger row = [indexPath row];
+            NSDictionary *dict=[self.results objectAtIndex:row];
+            cell.orderTimeLabel.text=[NSString stringWithFormat:@"跟单时间：%@", [dict objectForKey:@"pay_time"]]  ;
+            cell.orderIdLabel.text=[NSString stringWithFormat:@"订单号：%@", [dict objectForKey:@"trade_id"]];
+            NSString *picUrl=[dict objectForKey:@"pic_url"];
+            if (picUrl != [NSNull null] && [picUrl rangeOfString:@"http://"].location != NSNotFound) {
+                cell.productImageView.imageURL = [NSURL URLWithString:[dict objectForKey:@"pic_url"]];
+            }
+            
+            cell.productDetailLabel.numberOfLines=0;
+            cell.productDetailLabel.text=[dict objectForKey:@"item_title"];
+            cell.productMoneyLabel.text=[NSString stringWithFormat:@"￥%@", [dict objectForKey:@"pay_price"]];
+            cell.fanLabel.text=[NSString stringWithFormat:@"返%@元", [dict objectForKey:@"fxje"]];
+            
+        }
+        return cell;
+    }else if ([[PassValueUtil listType] isEqualToString:@"mallOrder"]){
+        static NSString *CellWithIdentifier = @"OrderTableViewCell";
+        OrderTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:CellWithIdentifier owner:self options:nil] lastObject];
+            NSUInteger row = [indexPath row];
+            NSDictionary *dict=[self.results objectAtIndex:row];
+            cell.orderTimeLabel.text=[NSString stringWithFormat:@"跟单时间：%@", [dict objectForKey:@"pay_time"]]  ;
+            cell.orderIdLabel.text=[NSString stringWithFormat:@"订单号：%@", [dict objectForKey:@"trade_id"]];
+            NSString *picUrl=[dict objectForKey:@"pic_url"];
+            if (picUrl != [NSNull null] && [picUrl rangeOfString:@"http://"].location != NSNotFound) {
+                cell.productImageView.imageURL = [NSURL URLWithString:[dict objectForKey:@"pic_url"]];
+            }
+            
+            cell.productDetailLabel.numberOfLines=0;
+            cell.productDetailLabel.text=[dict objectForKey:@"item_title"];
+            cell.productMoneyLabel.text=[NSString stringWithFormat:@"￥%@", [dict objectForKey:@"pay_price"]];
+            cell.fanLabel.text=[NSString stringWithFormat:@"返%@元", [dict objectForKey:@"fxje"]];
+            
+        }
+        return cell;
     }
+    
     return nil;
+    
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([[PassValueUtil listType] isEqualToString:@"msg"]){
+        NSDictionary *dict=[self.results objectAtIndex:[indexPath row]];
+        NSString *msgId=[dict objectForKey:@"id"];
+        NSString *contect=[dict objectForKey:@"content"];
+        NSString *addTime=[dict objectForKey:@"addtime"];
+        [PassValueUtil setMsgId:msgId];
+        [PassValueUtil setMsgContent:contect];
+        [PassValueUtil setMsgAddTime:addTime];
+        [self performSegueWithIdentifier:@"showMsgDetailViewId" sender:self];
+    }
     
 }
 
@@ -213,6 +316,12 @@ static NSString *TYPE;
 {
     if ([[PassValueUtil listType] isEqualToString:@"msg"]) {
         return 112;
+    }else if ([[PassValueUtil listType] isEqualToString:@"taobaoOrder"]){
+        return 140;
+    }else if ([[PassValueUtil listType] isEqualToString:@"paipaiOrder"]){
+        return 140;
+    }else if ([[PassValueUtil listType] isEqualToString:@"mallOrder"]){
+        return 140;
     }
     return 44;
 }

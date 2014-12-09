@@ -38,10 +38,21 @@
     [client postPath:urlStr parameters:nil
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  [HUD removeFromSuperview];
+                 NSLog(@"%@", responseObject);
+                 
                  NSString* status = [responseObject objectForKey:@"status"];
                  if ([status intValue]==112) {
                      MBProgressHUD* HUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
                      HUD.labelText = @"您已经签过到了";
+                     HUD.mode = MBProgressHUDModeText;
+                     HUD.dimBackground = YES;
+                     [HUD show:YES];
+                     [HUD hide:YES afterDelay:2];
+                 }else if ([status intValue] == 0){
+                     NSDictionary *dict=[responseObject objectForKey:@"result"];
+                     NSString *jifen = [dict objectForKey:@"qd"];
+                     MBProgressHUD* HUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+                     HUD.labelText = [NSString stringWithFormat:@"签到成功，获得%@集分宝", jifen];
                      HUD.mode = MBProgressHUDModeText;
                      HUD.dimBackground = YES;
                      [HUD show:YES];

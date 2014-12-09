@@ -12,6 +12,9 @@
 
 static NSString* searchText;
 static NSString* listType;
+static NSString* messageId;
+static NSString* msgContent;
+static NSString * msgAddTime;
 
 +(NSString *) searchText{
     return searchText;
@@ -28,4 +31,29 @@ static NSString* listType;
 +(void) setListType:(NSString *)type{
     listType=type;
 }
+
++(NSString *) msgId{
+    return messageId;
+}
+
++(void) setMsgId:(NSString *)msgId{
+    messageId=msgId;
+}
+
++(NSString *) msgContent{
+    return msgContent;
+}
+
++(void) setMsgContent:(NSString *)content{
+    msgContent=content;
+}
+
++(NSString *) msgAddTime{
+    return msgAddTime;
+}
+
++(void) setMsgAddTime:(NSString *)time{
+    msgAddTime=time;
+}
+
 @end

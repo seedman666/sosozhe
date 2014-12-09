@@ -105,6 +105,8 @@
 		033CFC5D1A35ED4700BDBB38 /* CheckInHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033CFC5B1A35ED4700BDBB38 /* CheckInHistoryTableViewCell.xib */; };
 		033CFC611A35F42200BDBB38 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 033CFC5F1A35F42200BDBB38 /* MessageTableViewCell.m */; };
 		033CFC621A35F42200BDBB38 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033CFC601A35F42200BDBB38 /* MessageTableViewCell.xib */; };
+		0380A3C51A372AE6008C28E5 /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0380A3C31A372AE6008C28E5 /* OrderTableViewCell.m */; };
+		0380A3C61A372AE6008C28E5 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0380A3C41A372AE6008C28E5 /* OrderTableViewCell.xib */; };
 		038AA1FB1A32BA86005B00B2 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038AA1FA1A32BA86005B00B2 /* WebViewController.m */; };
 		03B51FA818FD7EA900F862E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B51FA718FD7EA900F862E1 /* Foundation.framework */; };
 		03B51FAA18FD7EA900F862E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B51FA918FD7EA900F862E1 /* CoreGraphics.framework */; };
@@ -148,6 +150,7 @@
 		03FC3A011A1AD4CC00F6504D /* SearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FC39FF1A1AD4CC00F6504D /* SearchResultTableViewCell.m */; };
 		03FC3A021A1AD4CC00F6504D /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03FC3A001A1AD4CC00F6504D /* SearchResultTableViewCell.xib */; };
 		03FC54C71A2BF7C300D1805D /* MemberOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FC54C61A2BF7C300D1805D /* MemberOnlyViewController.m */; };
+		03FF30161A373A81005E9887 /* MsgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FF30151A373A81005E9887 /* MsgDetailViewController.m */; };
 		9AC91AF80AE74C3CA5A68D0A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BBFC5D6C98494FB4997A06 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -294,6 +297,9 @@
 		033CFC5F1A35F42200BDBB38 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		033CFC601A35F42200BDBB38 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		036DEC5619002F48003F0F45 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		0380A3C21A372AE6008C28E5 /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
+		0380A3C31A372AE6008C28E5 /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
+		0380A3C41A372AE6008C28E5 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
 		038AA1F91A32BA86005B00B2 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		038AA1FA1A32BA86005B00B2 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		03B51FA418FD7EA900F862E1 /* sosozhe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sosozhe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -363,6 +369,8 @@
 		03FC3A001A1AD4CC00F6504D /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		03FC54C51A2BF7C300D1805D /* MemberOnlyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemberOnlyViewController.h; path = ../MemberOnlyViewController.h; sourceTree = "<group>"; };
 		03FC54C61A2BF7C300D1805D /* MemberOnlyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemberOnlyViewController.m; path = ../MemberOnlyViewController.m; sourceTree = "<group>"; };
+		03FF30141A373A81005E9887 /* MsgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgDetailViewController.h; sourceTree = "<group>"; };
+		03FF30151A373A81005E9887 /* MsgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgDetailViewController.m; sourceTree = "<group>"; };
 		A50530DD1AFA4FC284870635 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B1BBFC5D6C98494FB4997A06 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -655,6 +663,11 @@
 				033CFC5E1A35F42200BDBB38 /* MessageTableViewCell.h */,
 				033CFC5F1A35F42200BDBB38 /* MessageTableViewCell.m */,
 				033CFC601A35F42200BDBB38 /* MessageTableViewCell.xib */,
+				0380A3C21A372AE6008C28E5 /* OrderTableViewCell.h */,
+				0380A3C31A372AE6008C28E5 /* OrderTableViewCell.m */,
+				0380A3C41A372AE6008C28E5 /* OrderTableViewCell.xib */,
+				03FF30141A373A81005E9887 /* MsgDetailViewController.h */,
+				03FF30151A373A81005E9887 /* MsgDetailViewController.m */,
 			);
 			path = sosozhe;
 			sourceTree = "<group>";
@@ -828,6 +841,7 @@
 				032D73CD18FEC96000FA8284 /* banner1.png in Resources */,
 				0308BAA31A348B71008EED73 /* LICENSE in Resources */,
 				032D73D918FEC96000FA8284 /* pinpai_amazon.png in Resources */,
+				0380A3C61A372AE6008C28E5 /* OrderTableViewCell.xib in Resources */,
 				033CFC621A35F42200BDBB38 /* MessageTableViewCell.xib in Resources */,
 				032D73E418FEC96000FA8284 /* search_shangpin.png in Resources */,
 				032D73E018FEC96000FA8284 /* pinpai_xiecheng.png in Resources */,
@@ -950,11 +964,13 @@
 				03FB7CF41A222B27006BDAF5 /* UIImageView+WebCache.m in Sources */,
 				03FB7CEC1A222B27006BDAF5 /* SDWebImageDownloaderOperation.m in Sources */,
 				0309630C1A237C08006E2A77 /* UIScrollView+MJExtension.m in Sources */,
+				0380A3C51A372AE6008C28E5 /* OrderTableViewCell.m in Sources */,
 				0308BA8E1A3414B3008EED73 /* CommonUtil.m in Sources */,
 				0309630A1A237C08006E2A77 /* MJRefreshFooterView.m in Sources */,
 				0308BAA71A348B71008EED73 /* EGOImageLoader.m in Sources */,
 				032857501903DF2A0094517B /* MoreBrandViewController.m in Sources */,
 				03FB7CE81A222B27006BDAF5 /* SDImageCache.m in Sources */,
+				03FF30161A373A81005E9887 /* MsgDetailViewController.m in Sources */,
 				030963081A237C08006E2A77 /* MJRefreshBaseView.m in Sources */,
 				033CFC611A35F42200BDBB38 /* MessageTableViewCell.m in Sources */,
 				03FB7CE61A222B27006BDAF5 /* MKAnnotationView+WebCache.m in Sources */,

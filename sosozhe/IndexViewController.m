@@ -86,13 +86,13 @@
 -(void) requestHotBrand{
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-    NSDictionary *parameters = @{@"page": @"1", @"num" : @"8", @"mod" : @"ajax", @"act": @"malls"};
+    NSDictionary *parameters = @{@"page": @"1", @"num" : @"9", @"mod" : @"ajax", @"act": @"malls"};
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
 
-    [client postPath:@"index.php?mod=ajax&act=malls&page=1&num=8" parameters:parameters
+    [client postPath:@"index.php?mod=ajax&act=malls&page=1&num=9" parameters:parameters
     success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.HUD removeFromSuperview];
         NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
@@ -131,14 +131,14 @@
             [[self hotStoreView] addSubview:brandView];
         }
         
-        BrandView *brandView=[[BrandView alloc] initWithFrame:CGRectMake(9+100*2, 29+76*2, 77, 65)];
-        UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(5, 41, 50, 25)];
-        [titleLabel setText:@"查看更多"];
-        [titleLabel setFont:[UIFont systemFontOfSize:10]];
-        [brandView addSubview:titleLabel];
-        UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(moreBrandViewClick:)];
-        [brandView addGestureRecognizer:tapGesture];
-        [[self hotStoreView] addSubview:brandView];
+//        BrandView *brandView=[[BrandView alloc] initWithFrame:CGRectMake(9+100*2, 29+76*2, 77, 65)];
+//        UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(5, 41, 50, 25)];
+//        [titleLabel setText:@"查看更多"];
+//        [titleLabel setFont:[UIFont systemFontOfSize:10]];
+//        [brandView addSubview:titleLabel];
+//        UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(moreBrandViewClick:)];
+//        [brandView addGestureRecognizer:tapGesture];
+//        [[self hotStoreView] addSubview:brandView];
 
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {

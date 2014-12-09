@@ -16,4 +16,12 @@
 +(NSString *) listType;
 +(void) setListType : (NSString *) type;
 
++(NSString *) msgId;
++(void) setMsgId:(NSString *)msgId;
+
++(NSString *) msgContent;
++(void) setMsgContent:(NSString *) content;
+
++(NSString *) msgAddTime;
++(void) setMsgAddTime:(NSString *) time;
 @end
