@@ -8,6 +8,7 @@
 
 #import "WebViewController.h"
 #import "MBProgressHUD.h"
+#import "LoginUtil.h"
 
 @interface WebViewController ()<MBProgressHUDDelegate>
 
@@ -78,6 +79,7 @@
     NSLog(@"COOKIE：%@", cookies);
     
     if ([url isEqualToString:@"http://www.sosozhe.com/index.php?mod=api&act=do"]) {
+        [LoginUtil setLogin:YES];
         [self dismissModalViewControllerAnimated:YES];
     }
 }

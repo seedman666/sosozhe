@@ -133,7 +133,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="首页" image="tab_index_1_s.png" selectedImage="tab_bg.9.png" id="c9Y-E2-9eS"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="tab_index_1_s.png" id="c9Y-E2-9eS"/>
                     <connections>
                         <outlet property="addFriendView" destination="ChF-t3-0Rc" id="RT0-yQ-MWT"/>
                         <outlet property="bannerView" destination="Vm3-s9-eB5" id="HXK-yl-o49"/>
@@ -946,7 +946,6 @@
         <image name="qiandao_info_icon.png" width="63" height="63"/>
         <image name="qq_login.png" width="290" height="120"/>
         <image name="shourumingxi_info_icon.png" width="63" height="56"/>
-        <image name="tab_bg.9.png" width="12" height="181"/>
         <image name="tab_index_1_s.png" width="30" height="30"/>
         <image name="tab_mall_1_s.png" width="30" height="30"/>
         <image name="tab_tao_1_s.png" width="30" height="30"/>
@@ -963,8 +962,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="xZ8-aV-IOD"/>
+        <segue reference="0pZ-Gy-lvd"/>
         <segue reference="rp3-z2-nOY"/>
-        <segue reference="th8-1L-3OI"/>
-        <segue reference="Q8S-Q0-94m"/>
     </inferredMetricsTieBreakers>
 </document>

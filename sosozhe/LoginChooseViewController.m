@@ -8,6 +8,7 @@
 
 #import "LoginChooseViewController.h"
 #import "WebViewController.h"
+#import "LoginUtil.h"
 
 @interface LoginChooseViewController ()
 
@@ -45,6 +46,12 @@
 
 -(void) quit{
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    if ([LoginUtil isLogin]) {
+        [self dismissModalViewControllerAnimated:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

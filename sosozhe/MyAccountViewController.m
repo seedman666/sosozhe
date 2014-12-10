@@ -33,6 +33,10 @@
     return self;
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [self checkLoginStatus:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -63,7 +67,7 @@
     [self.mallOrderView addGestureRecognizer:tapGesture7];
 
     
-    [self checkLoginStatus];
+    [self checkLoginStatus:YES];
     
 }
 
@@ -142,7 +146,7 @@
     
 }
 
--(void) checkLoginStatus
+-(void) checkLoginStatus:(BOOL) isShowDialog
 {
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
@@ -150,6 +154,7 @@
     self.HUD.labelText = @"正在加载数据";
     self.HUD.dimBackground = YES;
     [self.HUD show:YES];
+    [self.HUD hide:YES afterDelay:1];
 
     UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
     NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
@@ -164,8 +169,7 @@
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://sosozhe.com"]];
-    NSLog(@"COOKIE:%@", cookies);
+//    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://sosozhe.com"]];
     
     [client postPath:urlStr parameters:nil
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -175,7 +179,10 @@
                  
                  if ([status intValue]==101) {
                      [LoginUtil setLogin:false];
-                     [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+                     if (isShowDialog) {
+                         [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+                     }
+                     
                  }else{
                      [LoginUtil setLogin:true];
                      [self initUserInfo:responseObject];
