@@ -32,6 +32,12 @@
 		0309630D1A237C08006E2A77 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 030963041A237C08006E2A77 /* UIScrollView+MJRefresh.m */; };
 		0309630E1A237C08006E2A77 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 030963061A237C08006E2A77 /* UIView+MJExtension.m */; };
 		031EFEA319055CC900A165C7 /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 031EFEA219055CC900A165C7 /* MyAccountViewController.m */; };
+		0323B2061A59776400E71C96 /* ILBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0323B2051A59776400E71C96 /* ILBarButtonItem.m */; };
+		0323B2081A597AE200E71C96 /* back1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0323B2071A597AE200E71C96 /* back1.png */; };
+		0323B20D1A597B4A00E71C96 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 0323B2091A597B4A00E71C96 /* gear.png */; };
+		0323B20E1A597B4A00E71C96 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0323B20A1A597B4A00E71C96 /* gear@2x.png */; };
+		0323B20F1A597B4A00E71C96 /* gearSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0323B20B1A597B4A00E71C96 /* gearSelected.png */; };
+		0323B2101A597B4A00E71C96 /* gearSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0323B20C1A597B4A00E71C96 /* gearSelected@2x.png */; };
 		03270293190283150049827A /* BrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03270292190283150049827A /* BrandView.m */; };
 		032857501903DF2A0094517B /* MoreBrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0328574F1903DF2A0094517B /* MoreBrandViewController.m */; };
 		032D73C718FEC96000FA8284 /* add_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 032D738C18FEC95F00FA8284 /* add_friend.png */; };
@@ -105,6 +111,7 @@
 		033CFC5D1A35ED4700BDBB38 /* CheckInHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033CFC5B1A35ED4700BDBB38 /* CheckInHistoryTableViewCell.xib */; };
 		033CFC611A35F42200BDBB38 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 033CFC5F1A35F42200BDBB38 /* MessageTableViewCell.m */; };
 		033CFC621A35F42200BDBB38 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033CFC601A35F42200BDBB38 /* MessageTableViewCell.xib */; };
+		03719ACC1A48F6A100E0353C /* RightLeftStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 03719ACB1A48F6A100E0353C /* RightLeftStoryboardSegue.m */; };
 		0380A3C51A372AE6008C28E5 /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0380A3C31A372AE6008C28E5 /* OrderTableViewCell.m */; };
 		0380A3C61A372AE6008C28E5 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0380A3C41A372AE6008C28E5 /* OrderTableViewCell.xib */; };
 		038AA1FB1A32BA86005B00B2 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038AA1FA1A32BA86005B00B2 /* WebViewController.m */; };
@@ -213,6 +220,13 @@
 		031161AE1A012EAF007BBACD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		031EFEA119055CC900A165C7 /* MyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountViewController.h; sourceTree = "<group>"; };
 		031EFEA219055CC900A165C7 /* MyAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountViewController.m; sourceTree = "<group>"; };
+		0323B2041A59776400E71C96 /* ILBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILBarButtonItem.h; sourceTree = "<group>"; };
+		0323B2051A59776400E71C96 /* ILBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILBarButtonItem.m; sourceTree = "<group>"; };
+		0323B2071A597AE200E71C96 /* back1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back1.png; sourceTree = "<group>"; };
+		0323B2091A597B4A00E71C96 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		0323B20A1A597B4A00E71C96 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
+		0323B20B1A597B4A00E71C96 /* gearSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearSelected.png; sourceTree = "<group>"; };
+		0323B20C1A597B4A00E71C96 /* gearSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gearSelected@2x.png"; sourceTree = "<group>"; };
 		03270291190283150049827A /* BrandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandView.h; sourceTree = "<group>"; };
 		03270292190283150049827A /* BrandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandView.m; sourceTree = "<group>"; };
 		0328574E1903DF2A0094517B /* MoreBrandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreBrandViewController.h; sourceTree = "<group>"; };
@@ -297,6 +311,8 @@
 		033CFC5F1A35F42200BDBB38 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		033CFC601A35F42200BDBB38 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		036DEC5619002F48003F0F45 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		03719ACA1A48F6A100E0353C /* RightLeftStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightLeftStoryboardSegue.h; sourceTree = "<group>"; };
+		03719ACB1A48F6A100E0353C /* RightLeftStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightLeftStoryboardSegue.m; sourceTree = "<group>"; };
 		0380A3C21A372AE6008C28E5 /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
 		0380A3C31A372AE6008C28E5 /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
 		0380A3C41A372AE6008C28E5 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
@@ -491,9 +507,23 @@
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
+		0323B2031A59772B00E71C96 /* barItem */ = {
+			isa = PBXGroup;
+			children = (
+				0323B2041A59776400E71C96 /* ILBarButtonItem.h */,
+				0323B2051A59776400E71C96 /* ILBarButtonItem.m */,
+			);
+			name = barItem;
+			sourceTree = "<group>";
+		};
 		032D738B18FEC95F00FA8284 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				0323B2091A597B4A00E71C96 /* gear.png */,
+				0323B20A1A597B4A00E71C96 /* gear@2x.png */,
+				0323B20B1A597B4A00E71C96 /* gearSelected.png */,
+				0323B20C1A597B4A00E71C96 /* gearSelected@2x.png */,
+				0323B2071A597AE200E71C96 /* back1.png */,
 				03F8019F1A2F487100EB0185 /* mail.png */,
 				03F801A01A2F487100EB0185 /* qq_login.png */,
 				03F801A11A2F487100EB0185 /* taobao_login.png */,
@@ -609,6 +639,7 @@
 		03B51FAD18FD7EA900F862E1 /* sosozhe */ = {
 			isa = PBXGroup;
 			children = (
+				0323B2031A59772B00E71C96 /* barItem */,
 				0308BA8F1A348B71008EED73 /* EGOImageLoading */,
 				0308BA7B1A340735008EED73 /* utils */,
 				03B51FB618FD7EA900F862E1 /* AppDelegate.h */,
@@ -668,6 +699,8 @@
 				0380A3C41A372AE6008C28E5 /* OrderTableViewCell.xib */,
 				03FF30141A373A81005E9887 /* MsgDetailViewController.h */,
 				03FF30151A373A81005E9887 /* MsgDetailViewController.m */,
+				03719ACA1A48F6A100E0353C /* RightLeftStoryboardSegue.h */,
+				03719ACB1A48F6A100E0353C /* RightLeftStoryboardSegue.m */,
 			);
 			path = sosozhe;
 			sourceTree = "<group>";
@@ -833,6 +866,7 @@
 				032D73F418FEC96000FA8284 /* tab_tao_2.png in Resources */,
 				032D73D618FEC96000FA8284 /* message.png in Resources */,
 				032D73F518FEC96000FA8284 /* tab_tao_2_s.png in Resources */,
+				0323B2081A597AE200E71C96 /* back1.png in Resources */,
 				032D73D318FEC96000FA8284 /* juhuasuan_icon.png in Resources */,
 				032D73D018FEC96000FA8284 /* check.png in Resources */,
 				032D73CE18FEC96000FA8284 /* banner2.png in Resources */,
@@ -854,6 +888,7 @@
 				032D73E918FEC96000FA8284 /* tab_bg.png in Resources */,
 				032D73FA18FEC96000FA8284 /* tao_icon.png in Resources */,
 				032D73EA18FEC96000FA8284 /* tab_index_1.png in Resources */,
+				0323B20D1A597B4A00E71C96 /* gear.png in Resources */,
 				032D73D418FEC96000FA8284 /* logo.png in Resources */,
 				032D73C718FEC96000FA8284 /* add_friend.png in Resources */,
 				032D73CC18FEC96000FA8284 /* back.png in Resources */,
@@ -867,6 +902,7 @@
 				0308BAA21A348B71008EED73 /* EGOCache.podspec in Resources */,
 				032D73DB18FEC96000FA8284 /* pinpai_jingdong.png in Resources */,
 				032D73DC18FEC96000FA8284 /* pinpai_jumei.png in Resources */,
+				0323B20E1A597B4A00E71C96 /* gear@2x.png in Resources */,
 				032D73ED18FEC96000FA8284 /* tab_index_2_s.png in Resources */,
 				032D73CF18FEC96000FA8284 /* banner3.png in Resources */,
 				032D73E818FEC96000FA8284 /* tab_bg.9.png in Resources */,
@@ -890,6 +926,7 @@
 				032D73F718FEC96000FA8284 /* tab_user_1_s.png in Resources */,
 				032D73F618FEC96000FA8284 /* tab_user_1.png in Resources */,
 				033CFC5D1A35ED4700BDBB38 /* CheckInHistoryTableViewCell.xib in Resources */,
+				0323B2101A597B4A00E71C96 /* gearSelected@2x.png in Resources */,
 				032D73D118FEC96000FA8284 /* dot_off.png in Resources */,
 				032D73EE18FEC96000FA8284 /* tab_mall_1.png in Resources */,
 				032D73CB18FEC96000FA8284 /* arrow_icon.png in Resources */,
@@ -903,6 +940,7 @@
 				032D73CA18FEC96000FA8284 /* arrow.png in Resources */,
 				03B51FBB18FD7EA900F862E1 /* Main.storyboard in Resources */,
 				030963071A237C08006E2A77 /* MJRefresh.bundle in Resources */,
+				0323B20F1A597B4A00E71C96 /* gearSelected.png in Resources */,
 				032D73E318FEC96000FA8284 /* search_bg.png in Resources */,
 				032D73F318FEC96000FA8284 /* tab_tao_1_s.png in Resources */,
 				03CADD0F1A21DEF60054BDCA /* HotBrandTableViewCell.xib in Resources */,
@@ -996,6 +1034,7 @@
 				0308BAAB1A349A89008EED73 /* PassValueUtil.m in Sources */,
 				0309630B1A237C08006E2A77 /* MJRefreshHeaderView.m in Sources */,
 				03FB7CEA1A222B27006BDAF5 /* SDWebImageDecoder.m in Sources */,
+				0323B2061A59776400E71C96 /* ILBarButtonItem.m in Sources */,
 				0308BAA11A348B71008EED73 /* EGOCache.m in Sources */,
 				033CFC521A35E1A700BDBB38 /* ShowListViewController.m in Sources */,
 				03B51FB818FD7EA900F862E1 /* AppDelegate.m in Sources */,
@@ -1012,6 +1051,7 @@
 				03B51FB418FD7EA900F862E1 /* main.m in Sources */,
 				03CADD0E1A21DEF60054BDCA /* HotBrandTableViewCell.m in Sources */,
 				032D740C18FEDC4000FA8284 /* CustomTextField.m in Sources */,
+				03719ACC1A48F6A100E0353C /* RightLeftStoryboardSegue.m in Sources */,
 				032D740418FECA0D00FA8284 /* IndexViewController.m in Sources */,
 				0308BA7E1A340766008EED73 /* LoginUtil.m in Sources */,
 				03FB7CEB1A222B27006BDAF5 /* SDWebImageDownloader.m in Sources */,

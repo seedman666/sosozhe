@@ -10,7 +10,7 @@
 #import "CustomTextField.h"
 #import "MBProgressHUD.h"
 
-@interface IndexViewController : ViewController<MBProgressHUDDelegate, UITextFieldDelegate>{
+@interface IndexViewController : ViewController<MBProgressHUDDelegate, UITextFieldDelegate, UIAlertViewDelegate>{
     MBProgressHUD *HUD;
 }
 @property (weak, nonatomic) IBOutlet UITabBarItem *indexTabBar;

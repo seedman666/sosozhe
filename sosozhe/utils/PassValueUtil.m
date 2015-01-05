@@ -15,6 +15,9 @@ static NSString* listType;
 static NSString* messageId;
 static NSString* msgContent;
 static NSString * msgAddTime;
+static NSString* url;
+static NSString* webViewTitle;
+static NSString* webViewTitle2;
 
 +(NSString *) searchText{
     return searchText;
@@ -54,6 +57,30 @@ static NSString * msgAddTime;
 
 +(void) setMsgAddTime:(NSString *)time{
     msgAddTime=time;
+}
+
++(NSString *) getUrl{
+    return  url;
+}
+
++(void) setUrl:(NSString *)urlStr{
+    url=urlStr;
+}
+
++(NSString *) getWebViewTitle{
+    return webViewTitle;
+}
+
++(void) setWebViewTitle:(NSString *)title{
+    webViewTitle=title;
+}
+
++(NSString *) getWebViewTitle2{
+    return webViewTitle2;
+}
+
++(void) setWebViewTitle2:(NSString *)title2{
+    webViewTitle2=title2;
 }
 
 @end

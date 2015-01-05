@@ -9,6 +9,9 @@
 #import "WebViewController.h"
 #import "MBProgressHUD.h"
 #import "LoginUtil.h"
+#import "LoginUtil.h"
+#import "ILBarButtonItem.h"
+#import "PassValueUtil.h"
 
 @interface WebViewController ()<MBProgressHUDDelegate>
 
@@ -23,18 +26,52 @@
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationHandler:) name:@"webviewParamNotification" object:nil];
     self.webView.delegate=self;
+    
+    /* Left bar button item */
+    ILBarButtonItem *backBtn =
+    [ILBarButtonItem barItemWithImage:[UIImage imageNamed:@"back1.png"]
+                        selectedImage:[UIImage imageNamed:@"back1.png"]
+                               target:self
+                               action:@selector(backTapped:)];
+    
+    self.titleBar.leftBarButtonItem = backBtn;
+    
+    /* Right bar button item */
+    ILBarButtonItem *closeBtn =
+    [ILBarButtonItem barItemWithImage:[UIImage imageNamed:@"gear"]
+                        selectedImage:[UIImage imageNamed:@"gearSelected.png"]
+                               target:self
+                               action:@selector(CloseTapped:)];
+    self.titleBar.rightBarButtonItem=closeBtn;
+}
+
+- (IBAction)backTapped:(id)sender {
+    if ([self.webView canGoBack]) {
+        [self.webView goBack];
+    }
+}
+
+-(IBAction)CloseTapped:(id)sender{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void) notificationHandler:(NSNotification *) notification{
     
     NSString *urlStr = [notification object];
-    NSURL *url=[[NSURL alloc] initWithString:urlStr];
+    NSString *urlStrWithUid=urlStr;
+    if ([LoginUtil isLogin]) {
+        if ([urlStr rangeOfString:@"uid="].location != NSNotFound) {
+            urlStrWithUid =[NSString stringWithFormat:@"%@%@", urlStr, [LoginUtil getUid]];
+        }else{
+            urlStrWithUid =[NSString stringWithFormat:@"%@&uid=%@", urlStr, [LoginUtil getUid]];
+        }
+        
+    }
+    NSLog(@"URL:%@", urlStrWithUid);
+    NSURL *url=[[NSURL alloc] initWithString:urlStrWithUid];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
-- (IBAction)press:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -42,17 +79,8 @@
 }
 
 -(BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    NSString *url=[request.URL absoluteString];
-    
-    
-    
-    if ([url isEqualToString:@"http://www.sosozhe.com/index.php?mod=api&act=do"]) {
-        
-        
-        
-//        [self dismissModalViewControllerAnimated:YES];
-        return YES;
-    }
+    //NSString *url=[request.URL absoluteString];
+
     return YES;
 }
 
@@ -66,7 +94,7 @@
     [self.view addSubview:self.HUD];
     self.HUD.delegate = self;
     self.HUD.labelText = @"正在加载数据";
-    self.HUD.dimBackground = YES;
+    self.HUD.dimBackground = NO;
     [self.HUD show:YES];
     [self.HUD hide:YES afterDelay:1];
 }
@@ -75,11 +103,16 @@
     
     NSString *url=[webView.request.URL absoluteString];
     
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://www.sosozhe.com"]];
-    NSLog(@"COOKIE：%@", cookies);
+//    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://www.sosozhe.com"]];
     
+    
+     NSString *oldAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    NSLog(@"oldAgent:%@", oldAgent);
+//    self.titleBar.title= [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.titleBar.title=[NSString stringWithFormat:@"%@最高返利(%@)", [PassValueUtil getWebViewTitle], [PassValueUtil getWebViewTitle2]];
     if ([url isEqualToString:@"http://www.sosozhe.com/index.php?mod=api&act=do"]) {
         [LoginUtil setLogin:YES];
+        [LoginUtil checkLoginAsyn];
         [self dismissModalViewControllerAnimated:YES];
     }
 }

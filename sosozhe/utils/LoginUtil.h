@@ -13,4 +13,7 @@
 +(BOOL) isLogin;
 +(void) setLogin :(BOOL) islog;
 +(void) checkLoginAsyn;
+
++(NSString *) getUid;
++(void) setUid:(NSString *)userId;
 @end

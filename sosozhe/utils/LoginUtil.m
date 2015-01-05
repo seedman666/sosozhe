@@ -15,6 +15,7 @@
 @implementation LoginUtil
 
 static BOOL isLogin;
+static NSString *uid;
 
 +(BOOL) isLogin{
     return isLogin;
@@ -47,6 +48,7 @@ static BOOL isLogin;
                      isLogin=false;
                  }else{
                      isLogin=true;
+                     uid=[[responseObject objectForKey:@"result"] objectForKey:@"id"];
                  }
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -54,6 +56,14 @@ static BOOL isLogin;
                  
              }
      ];
+}
+
++(NSString *) getUid{
+    return uid;
+}
+
++(void) setUid:(NSString *)userId{
+    uid=userId;
 }
 
 @end

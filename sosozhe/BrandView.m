@@ -10,7 +10,7 @@
 
 @implementation BrandView
 
-@synthesize url;
+@synthesize url, title, title2;
 
 - (id)initWithFrame:(CGRect)frame
 {

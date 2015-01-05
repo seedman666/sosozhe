@@ -24,4 +24,13 @@
 
 +(NSString *) msgAddTime;
 +(void) setMsgAddTime:(NSString *) time;
+
++(NSString *) getUrl;
++(void) setUrl:(NSString *)urlStr;
+
++(NSString *) getWebViewTitle;
++(void) setWebViewTitle:(NSString *) title;
+
++(NSString *) getWebViewTitle2;
++(void) setWebViewTitle2:(NSString *)title2;
 @end

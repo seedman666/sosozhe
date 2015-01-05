@@ -12,6 +12,8 @@
 @interface BrandView : UIView
 
 @property NSString *url;
+@property NSString *title;
+@property NSString *title2;
 
 @property (weak, nonatomic) IBOutlet UILabel *fanliLabel;
 @property (weak, nonatomic) IBOutlet EGOImageView *brandEgoImageVIew;

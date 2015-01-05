@@ -89,7 +89,8 @@
     [self performSegueWithIdentifier:@"brandDetailWebView" sender:self];
     BrandView *view=(BrandView *)gesture.view;
     NSString *url=view.url;
-    NSLog(@"1%@", url);
+    [PassValueUtil setWebViewTitle:view.title];
+    [PassValueUtil setWebViewTitle2:view.title2];
     //NSDictionary *dicts = [NSDictionary dictionaryWithObjectsAndKeys:@"url",url, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewParamNotification" object:url];
     
@@ -152,6 +153,8 @@
     view.fanliLabel.text=[NSString stringWithFormat:@"最高返利：%@", [dict objectForKey:@"fan"]];
     NSString *url=[dict objectForKey:@"url"];
     view.url=url;
+    view.title=[dict objectForKey:@"title"];
+    view.title2=[dict objectForKey:@"fan"];
 
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(brandViewClick:)];
     [view addGestureRecognizer:tapGesture];

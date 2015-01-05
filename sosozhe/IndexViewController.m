@@ -106,6 +106,8 @@
             
             BrandView *brandView=[[BrandView alloc] initWithFrame:CGRectMake(9+100*(i%3), 29+76*(j%3), 77, 65)];
             brandView.url=url;
+            brandView.title=title;
+            brandView.title2=fanRation;
             UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(brandViewClick:)];
             [brandView addGestureRecognizer:tapGesture];
             
@@ -152,11 +154,33 @@
 }
 
 -(void) brandViewClick:(UITapGestureRecognizer *) gesture{
-    [self performSegueWithIdentifier:@"brandDetailWebView" sender:self];
     BrandView *view=(BrandView *)gesture.view;
     NSString *url=view.url;
+    [PassValueUtil setWebViewTitle:view.title];
+    [PassValueUtil setWebViewTitle2:view.title2];
+    if (![LoginUtil isLogin]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有登录，未登录无法获取返利，是否登录" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+        [PassValueUtil setUrl:url];
+        [alertView setTag:0];
+        [alertView show];
+        return;
+    }
+    [self performSegueWithIdentifier:@"brandDetailWebView" sender:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewParamNotification" object:url];
     
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag==0) {
+        if (buttonIndex == 0) {
+            [self performSegueWithIdentifier:@"brandDetailWebView" sender:self];
+            NSString *url=[PassValueUtil getUrl];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewParamNotification" object:url];
+        }else{
+            [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+        }
+        
+    }
 }
 
 -(void) moreBrandViewClick:(UITapGestureRecognizer *) gesture{

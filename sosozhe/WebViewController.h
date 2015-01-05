@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WebViewController : UIViewController<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UINavigationItem *titleBar;
 
 @end
