@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "UMSocial.h"
 
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
 
@@ -25,6 +26,9 @@
     //regist the new agent
     NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newAgent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    
+     [UMSocialData setAppKey:@"507fcab25270157b37000010"];
+    
     return YES;
 }
 							

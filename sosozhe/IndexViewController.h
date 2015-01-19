@@ -22,4 +22,15 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *hotStoreView;
 
+@property (weak, nonatomic) IBOutlet UIView *brand1;
+@property (weak, nonatomic) IBOutlet UIView *brand2;
+
+@property (weak, nonatomic) IBOutlet UIView *brand3;
+@property (weak, nonatomic) IBOutlet UIView *brand4;
+@property (weak, nonatomic) IBOutlet UIView *brand5;
+@property (weak, nonatomic) IBOutlet UIView *brand6;
+@property (weak, nonatomic) IBOutlet UIView *brand7;
+@property (weak, nonatomic) IBOutlet UIView *brand8;
+@property (weak, nonatomic) IBOutlet UIView *brand9;
+
 @end

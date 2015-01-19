@@ -150,7 +150,7 @@
         view.brandEgoImageVIew.imageURL=[NSURL URLWithString:imgUrl];
         
     }
-    view.fanliLabel.text=[NSString stringWithFormat:@"最高返利：%@", [dict objectForKey:@"fan"]];
+    view.fanliLabel.text=[NSString stringWithFormat:@"%@", [dict objectForKey:@"fan"]];
     NSString *url=[dict objectForKey:@"url"];
     view.url=url;
     view.title=[dict objectForKey:@"title"];

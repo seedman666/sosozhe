@@ -20,6 +20,7 @@
 #import "CommonUtil.h"
 #import "Constant.h"
 #import "PassValueUtil.h"
+#import "UMSocial.h"
 
 @interface IndexViewController ()<MBProgressHUDDelegate>
 @property MBProgressHUD *HUD;
@@ -82,6 +83,29 @@
     }
 }
 
+-(UIView *) getBrandView :(NSDictionary *) dict
+{
+    NSString *imgUrl=[dict objectForKey:@"img"];
+    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"BrandView" owner:self options:nil];
+    BrandView *view=[nib objectAtIndex:0];
+    if (imgUrl.length > 0) {
+        view.brandEgoImageVIew.imageURL=[NSURL URLWithString:imgUrl];
+        
+    }
+    view.fanliLabel.text=[NSString stringWithFormat:@"%@", [dict objectForKey:@"fan"]];
+    view.fanliLabel.textColor=[UIColor orangeColor];
+    NSString *url=[dict objectForKey:@"url"];
+    view.url=url;
+    view.title=[dict objectForKey:@"title"];
+    view.title2=[dict objectForKey:@"fan"];
+    
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(brandViewClick:)];
+    [view addGestureRecognizer:tapGesture];
+    
+    return view;
+    
+}
+
 -(void) requestHotBrand{
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -95,51 +119,69 @@
     success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.HUD removeFromSuperview];
         NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
-        for (int i=0; i<[array count]; i=i+1) {
-            NSDictionary *dict=[array objectAtIndex:i];
-            int j=(i/3)%3;
-            
-            NSString *imgUrl=[dict objectForKey:@"img"];
-            NSString *title=[[dict objectForKey:@"title"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            NSString *fanRation=[dict objectForKey:@"fan"];
-            NSString *url=[dict objectForKey:@"url"];
-            
-            BrandView *brandView=[[BrandView alloc] initWithFrame:CGRectMake(9+100*(i%3), 29+76*(j%3), 77, 65)];
-            brandView.url=url;
-            brandView.title=title;
-            brandView.title2=fanRation;
-            UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(brandViewClick:)];
-            [brandView addGestureRecognizer:tapGesture];
-            
-            
-            
-            UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 77, 40)];
-            UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(5, 41, 50, 25)];
-            UILabel *fanLabel=[[UILabel alloc] initWithFrame:CGRectMake(60, 41, 30, 25)];
-            
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgUrl]]];
-            [imageView setImage:image];
-            [titleLabel setText:title];
-            [titleLabel setFont:[UIFont systemFontOfSize:10]];
-            [fanLabel setText:fanRation];
-            [fanLabel setFont:[UIFont systemFontOfSize:10]];
-            [fanLabel setTextColor:[UIColor orangeColor]];
-            
-            [brandView addSubview:imageView];
-            [brandView addSubview:titleLabel];
-            [brandView addSubview:fanLabel];
-            
-            [[self hotStoreView] addSubview:brandView];
-        }
+        NSDictionary *dict1=[array objectAtIndex:0];
+        [self.brand1 addSubview:[self getBrandView:dict1]];
         
-//        BrandView *brandView=[[BrandView alloc] initWithFrame:CGRectMake(9+100*2, 29+76*2, 77, 65)];
-//        UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(5, 41, 50, 25)];
-//        [titleLabel setText:@"查看更多"];
-//        [titleLabel setFont:[UIFont systemFontOfSize:10]];
-//        [brandView addSubview:titleLabel];
-//        UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(moreBrandViewClick:)];
-//        [brandView addGestureRecognizer:tapGesture];
-//        [[self hotStoreView] addSubview:brandView];
+        NSDictionary *dict2=[array objectAtIndex:1];
+        [self.brand2 addSubview:[self getBrandView:dict2]];
+        
+        NSDictionary *dict3=[array objectAtIndex:2];
+        [self.brand3 addSubview:[self getBrandView:dict3]];
+        
+        NSDictionary *dict4=[array objectAtIndex:3];
+        [self.brand4 addSubview:[self getBrandView:dict4]];
+        
+        NSDictionary *dict5=[array objectAtIndex:4];
+        [self.brand5 addSubview:[self getBrandView:dict5]];
+        
+        NSDictionary *dict6=[array objectAtIndex:5];
+        [self.brand6 addSubview:[self getBrandView:dict6]];
+        
+        NSDictionary *dict7=[array objectAtIndex:6];
+        [self.brand7 addSubview:[self getBrandView:dict7]];
+        
+        NSDictionary *dict8=[array objectAtIndex:7];
+        [self.brand8 addSubview:[self getBrandView:dict8]];
+        
+        NSDictionary *dict9=[array objectAtIndex:8];
+        [self.brand9 addSubview:[self getBrandView:dict9]];
+        
+//        for (int i=0; i<[array count]; i=i+1) {
+//            NSDictionary *dict=[array objectAtIndex:i];
+//            int j=(i/3)%3;
+//            
+//            NSString *imgUrl=[dict objectForKey:@"img"];
+//            NSString *title=[[dict objectForKey:@"title"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//            NSString *fanRation=[dict objectForKey:@"fan"];
+//            NSString *url=[dict objectForKey:@"url"];
+//            
+//            BrandView *brandView=[[BrandView alloc] initWithFrame:CGRectMake(9+100*(i%3), 29+76*(j%3), 77, 65)];
+//            brandView.url=url;
+//            brandView.title=title;
+//            brandView.title2=fanRation;
+//            UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(brandViewClick:)];
+//            [brandView addGestureRecognizer:tapGesture];
+//            
+//            
+//            
+//            UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 77, 40)];
+//            UILabel *titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(5, 41, 50, 25)];
+//            UILabel *fanLabel=[[UILabel alloc] initWithFrame:CGRectMake(60, 41, 30, 25)];
+//            
+//            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgUrl]]];
+//            [imageView setImage:image];
+//            [titleLabel setText:title];
+//            [titleLabel setFont:[UIFont systemFontOfSize:10]];
+//            [fanLabel setText:fanRation];
+//            [fanLabel setFont:[UIFont systemFontOfSize:10]];
+//            [fanLabel setTextColor:[UIColor orangeColor]];
+//            
+//            [brandView addSubview:imageView];
+//            [brandView addSubview:titleLabel];
+//            [brandView addSubview:fanLabel];
+//            
+//            [[self hotStoreView] addSubview:brandView];
+//        }
 
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -198,11 +240,19 @@
 }
 
 - (void)addFriendClick:(UITapGestureRecognizer *)gesture{
-    if (!LoginUtil.isLogin) {
-        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
-        return;
-    }
-    [CommonUtil inviteFriend:self];
+    
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"507fcab25270157b37000010"
+                                      shareText:@"你要分享的文字"
+                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren,nil]
+                                       delegate:self];
+//    
+//    if (!LoginUtil.isLogin) {
+//        [self performSegueWithIdentifier:@"LoginViewControllerId" sender:self];
+//        return;
+//    }
+//    [CommonUtil inviteFriend:self];
 }
 
 - (void)didReceiveMemoryWarning

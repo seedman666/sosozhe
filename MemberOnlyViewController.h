@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *button10;
 @property (weak, nonatomic) IBOutlet UIButton *button11;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *navScrollView;
+
+
 - (IBAction)buttonDown:(id)sender;
 @property (weak, nonatomic) IBOutlet UITabBarItem *memberOnlyBarItem;
 

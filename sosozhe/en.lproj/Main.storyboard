@@ -94,6 +94,51 @@
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="253"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" id="s6T-X9-IIc">
+                                        <rect key="frame" x="8" y="37" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="Z4b-Fd-XPH">
+                                        <rect key="frame" x="205" y="37" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="YMw-wq-L5x">
+                                        <rect key="frame" x="106" y="37" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="lvc-gK-G8R">
+                                        <rect key="frame" x="8" y="110" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="dYc-h4-7cr">
+                                        <rect key="frame" x="205" y="110" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="lF7-yO-b5j">
+                                        <rect key="frame" x="106" y="110" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="Og4-xz-Znc">
+                                        <rect key="frame" x="8" y="183" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="mkG-u7-5xP">
+                                        <rect key="frame" x="205" y="183" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="ewh-HR-Fgg">
+                                        <rect key="frame" x="106" y="183" width="82" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -137,6 +182,15 @@
                     <connections>
                         <outlet property="addFriendView" destination="ChF-t3-0Rc" id="RT0-yQ-MWT"/>
                         <outlet property="bannerView" destination="Vm3-s9-eB5" id="HXK-yl-o49"/>
+                        <outlet property="brand1" destination="s6T-X9-IIc" id="Tsj-B1-kco"/>
+                        <outlet property="brand2" destination="YMw-wq-L5x" id="8Z1-1w-bdK"/>
+                        <outlet property="brand3" destination="Z4b-Fd-XPH" id="h3x-XH-CKm"/>
+                        <outlet property="brand4" destination="lvc-gK-G8R" id="wm7-pk-yDn"/>
+                        <outlet property="brand5" destination="lF7-yO-b5j" id="f7B-30-HMX"/>
+                        <outlet property="brand6" destination="dYc-h4-7cr" id="jf1-y2-hMA"/>
+                        <outlet property="brand7" destination="Og4-xz-Znc" id="Qny-mC-BWv"/>
+                        <outlet property="brand8" destination="ewh-HR-Fgg" id="y51-h7-Jms"/>
+                        <outlet property="brand9" destination="mkG-u7-5xP" id="y2y-nl-sSL"/>
                         <outlet property="checkInView" destination="qFZ-yL-f8J" id="4qq-sy-yyB"/>
                         <outlet property="hotStoreView" destination="lOl-2f-hC7" id="9fZ-FV-3nR"/>
                         <outlet property="indexTabBar" destination="c9Y-E2-9eS" id="P0Q-Ml-MSu"/>
@@ -236,180 +290,22 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" id="m4D-MH-Vns">
-                                <rect key="frame" x="0.0" y="64" width="320" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vhy-74-7u0">
-                                        <rect key="frame" x="11" y="-4" width="57" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="全部商品">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchDown" id="6Ve-JZ-4fv"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="B5H-d6-GY3">
-                                        <rect key="frame" x="69" y="-4" width="46" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="女装">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="ru0-XF-1ow"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fj2-PB-mVa">
-                                        <rect key="frame" x="108" y="-4" width="46" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="男装">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="iVO-ee-689"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ziv-BP-3dg">
-                                        <rect key="frame" x="147" y="-4" width="46" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="家居">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="eJD-HO-tNz"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cYj-Bw-Z7Z">
-                                        <rect key="frame" x="188" y="-4" width="46" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="母婴">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="o6O-zd-lVx"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AYl-xg-pCj">
-                                        <rect key="frame" x="230" y="-4" width="46" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="鞋包">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="Cjp-Ov-th4"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GvW-fs-d9d">
-                                        <rect key="frame" x="274" y="-4" width="46" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="配饰">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="EaO-l5-7o4"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NQL-Gw-UOy">
-                                        <rect key="frame" x="5" y="16" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="美食">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="97J-Te-588"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uSV-t1-qZq">
-                                        <rect key="frame" x="54" y="16" width="55" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="数码家电">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="PL8-qd-tVa"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5JP-tX-8lb">
-                                        <rect key="frame" x="113" y="16" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="化妆品">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="oy5-hp-kwe"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="krT-m5-U0Q">
-                                        <rect key="frame" x="162" y="16" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="9.9元">
-                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="AEF-mb-aBB"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Tp-tT-nAf">
-                                        <rect key="frame" x="211" y="16" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="19.9元">
-                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonDown:" destination="TL2-hw-e12" eventType="touchUpInside" id="6Jv-NA-oXY"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1UM-pq-R27">
-                                <rect key="frame" x="0.0" y="103" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="427"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ggo-O5-eCX">
+                                <rect key="frame" x="0.0" y="59" width="320" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="今日特卖" image="tab_tao_1_s.png" id="LNU-m5-3YG"/>
                     <connections>
-                        <outlet property="button0" destination="vhy-74-7u0" id="fuA-6B-2SM"/>
-                        <outlet property="button1" destination="B5H-d6-GY3" id="34r-74-hJD"/>
-                        <outlet property="button10" destination="krT-m5-U0Q" id="eTK-3g-g9c"/>
-                        <outlet property="button11" destination="9Tp-tT-nAf" id="DXM-x7-QOo"/>
-                        <outlet property="button2" destination="fj2-PB-mVa" id="0Ai-H7-guj"/>
-                        <outlet property="button3" destination="Ziv-BP-3dg" id="mgT-De-Mn1"/>
-                        <outlet property="button4" destination="cYj-Bw-Z7Z" id="oE3-Bz-bg2"/>
-                        <outlet property="button5" destination="AYl-xg-pCj" id="7Bm-hM-mQD"/>
-                        <outlet property="button6" destination="GvW-fs-d9d" id="VKv-b0-FGU"/>
-                        <outlet property="button7" destination="NQL-Gw-UOy" id="LZJ-fw-m6h"/>
-                        <outlet property="button8" destination="uSV-t1-qZq" id="ksf-oY-tMO"/>
-                        <outlet property="button9" destination="5JP-tX-8lb" id="EJI-qB-I52"/>
                         <outlet property="memberOnlyBarItem" destination="LNU-m5-3YG" id="sXq-Hj-Z5r"/>
+                        <outlet property="navScrollView" destination="ggo-O5-eCX" id="0gG-5H-31a"/>
                         <outlet property="searchText" destination="FTc-0B-Mc3" id="xmX-mM-Li0"/>
                         <outlet property="tagProductShowTableView" destination="1UM-pq-R27" id="ECq-1F-Wc0"/>
                         <segue destination="LXi-zR-Fli" kind="custom" identifier="SearchViewIde" customClass="RightLeftStoryboardSegue" id="KUO-8F-Ixz"/>
@@ -958,8 +854,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="0pZ-Gy-lvd"/>
+        <segue reference="mBp-Ya-Xnr"/>
         <segue reference="KUO-8F-Ixz"/>
-        <segue reference="th8-1L-3OI"/>
-        <segue reference="Q8S-Q0-94m"/>
     </inferredMetricsTieBreakers>
 </document>
