@@ -33,4 +33,8 @@
 
 +(NSString *) getWebViewTitle2;
 +(void) setWebViewTitle2:(NSString *)title2;
+
++(NSString *) getMallSearchTitle;
++(void) setMallSearchTitle:(NSString *) title;
+
 @end

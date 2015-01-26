@@ -208,12 +208,15 @@
     }else{
         avatarUrl=avatar;
     }
-    NSURL *url=[NSURL URLWithString:avatarUrl];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    self.avatarImageView.image=image;
+//    NSURL *url=[NSURL URLWithString:avatarUrl];
+//    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+//    self.avatarImageView.image=image;
     
     NSString *money=[dict objectForKey:@"money"];
     self.moneyLabel.text=[NSString stringWithFormat:@"%@元", money];
+    
+    NSString *jifenbao=[dict objectForKey:@"jifenbao"];
+    self.jifenbaoLabe.text=[NSString stringWithFormat:@"%@", jifenbao];
     
 }
 

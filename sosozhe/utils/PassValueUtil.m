@@ -18,6 +18,7 @@ static NSString * msgAddTime;
 static NSString* url;
 static NSString* webViewTitle;
 static NSString* webViewTitle2;
+static NSString* mallSearchTitle;
 
 +(NSString *) searchText{
     return searchText;
@@ -81,6 +82,14 @@ static NSString* webViewTitle2;
 
 +(void) setWebViewTitle2:(NSString *)title2{
     webViewTitle2=title2;
+}
+
++(NSString *) getMallSearchTitle{
+    return mallSearchTitle;
+}
+
++(void) setMallSearchTitle:(NSString *)title{
+    mallSearchTitle=title;
 }
 
 @end

@@ -8,4 +8,6 @@
 
 #define SEARCH_PAGE_SIZE 10
 
+#define PAGE_SIZE_LIST 10
+
 #define SECURE_KEY "uuN5wmUuRsDe6"

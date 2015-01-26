@@ -131,27 +131,27 @@ static NSString *TYPE;
     
     NSString *urlStr=nil;
     if ([[PassValueUtil listType] isEqualToString:@"income"]) {
-        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=income",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%d%@%@%@%@", @"index.php?mod=ajax&act=income",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=",PAGE_SIZE_LIST,@"&timestamp=",timestamp,@"&token=",token ];
     }else if ([[PassValueUtil listType] isEqualToString:@"checkin"]){
-        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=qdmingxi",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%d%@%@%@%@", @"index.php?mod=ajax&act=qdmingxi",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=",PAGE_SIZE_LIST,@"&timestamp=",timestamp,@"&token=",token ];
     }else if ([[PassValueUtil listType] isEqualToString:@"msg"]){
-        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=get_msg",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%d%@%@%@%@", @"index.php?mod=ajax&act=get_msg",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=",PAGE_SIZE_LIST,@"&timestamp=",timestamp,@"&token=",token ];
     }else if ([[PassValueUtil listType] isEqualToString:@"taobaoOrder"]){
-        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=taobao",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%d%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=taobao",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=",PAGE_SIZE_LIST,@"&timestamp=",timestamp,@"&token=",token ];
     }else if ([[PassValueUtil listType] isEqualToString:@"paipaiOrder"]){
-        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=paipai",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%d%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=paipai",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=",PAGE_SIZE_LIST,@"&timestamp=",timestamp,@"&token=",token ];
     }else if ([[PassValueUtil listType] isEqualToString:@"mallOrder"]){
-        urlStr=[NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=mall",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=10&timestamp=",timestamp,@"&token=",token ];
+        urlStr=[NSString stringWithFormat:@"%@%@%@%@%d%@%@%@%@", @"index.php?mod=ajax&act=tradelist&do=mall",@"&page_no=",[NSString stringWithFormat:@"%i", self.page],@"&page_size=",PAGE_SIZE_LIST,@"&timestamp=",timestamp,@"&token=",token ];
     }
     
     [client postPath:urlStr parameters:nil
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  // [self.HUD removeFromSuperview];
                  NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
-                 if ([array count]< 10) {
+                 if ([array count]< PAGE_SIZE_LIST) {
                      [self.showListTableView removeFooter];
                  }
-                 NSLog(@"%@", array);
+//                 NSLog(@"%@", array);
                  [self.results addObjectsFromArray:array];
                  
                  // 2.2秒后刷新表格UI
@@ -328,6 +328,7 @@ static NSString *TYPE;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"111:%lu", (unsigned long)[[self results] count]);
     return  [[self results]count];
 }
 

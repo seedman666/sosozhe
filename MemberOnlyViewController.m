@@ -22,6 +22,8 @@
 @property MBProgressHUD* HUD;
 @property NSInteger type;
 @property NSInteger page;
+@property NSArray* tags;
+@property NSMutableArray* tagLabels;
 @end
 
 @implementation MemberOnlyViewController
@@ -41,8 +43,50 @@
     self.page=1;
     [self.button0 setBackgroundColor:[UIColor grayColor]];
     
+    self.tags=[NSArray arrayWithObjects:@"全部商品", @"女装", @"男装", @"居家", @"母婴", @"鞋包", @"配饰", @"美食", @"数码家电", @"化妆品", @"9.9元", @"19.9元", nil];
+    
+    
+    [self genNavView];
     [self requestTagProducts:0];
     
+}
+
+-(void) genNavView{
+    self.tagLabels=[[NSMutableArray alloc] init];
+    for (int i=0; i<[self.tags count]; i++) {
+        UIView *view=[[UIButton alloc] initWithFrame:CGRectMake((i)*50+5, 5, 50, self.navScrollView.frame.size.height-10)];
+        UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
+//        [label setTitle:[self.tags objectAtIndex:i] forState:UIControlStateNormal];
+        label.text=[self.tags objectAtIndex:i];
+        label.font=[UIFont systemFontOfSize:12];
+        label.textAlignment=UITextAlignmentCenter;
+        label.textColor=[UIColor blackColor];
+        
+//        [label setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        if (i==0) {
+            view.backgroundColor=[UIColor grayColor];
+        }
+        [view addSubview:label];
+        view.tag=i;
+        UITapGestureRecognizer *tapGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelDown:)];
+        [view addGestureRecognizer:tapGestureTel];
+        
+        [self.navScrollView addSubview:view];
+        [self.tagLabels addObject:view];
+    }
+    self.navScrollView.contentSize = CGSizeMake([self.tags count]*50, self.navScrollView.frame.size.height);
+}
+
+-(void) labelDown:(UITapGestureRecognizer *)gesture{
+    UIView *label=gesture.view;
+    for (int i=0; i<self.tagLabels.count; i++) {
+        UIView *view=[self.tagLabels objectAtIndex:i];
+        view.backgroundColor=[UIColor clearColor];
+        if (i==label.tag) {
+            view.backgroundColor=[UIColor grayColor];
+        }
+    }
+    [self requestTagProducts:label.tag];
 }
 
 - (IBAction)buttonDown:(id)sender {
@@ -75,7 +119,7 @@
     NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
     NSString *token=[MD5Util md5:[NSString stringWithFormat:@"%@%s", timestamp, SECURE_KEY ] ];
     NSString *urlStr=[NSString stringWithFormat:@"%@%li%@%li%@%@%@%@", @"index.php?mod=ajax&act=hyzx&page_no=",self.page, @"&page_size=10&cateid=",self.type,@"&timestamp=",timestamp,@"&token=",token ];
-    NSLog(@"%@", urlStr);
+//    NSLog(@"%@", urlStr);
     
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -137,7 +181,7 @@
     NSString *timestamp=[NSString stringWithFormat:@"%lld", recordTime];
     NSString *token=[MD5Util md5:[NSString stringWithFormat:@"%@%s", timestamp, SECURE_KEY ] ];
     NSString *urlStr=[NSString stringWithFormat:@"%@%li%@%@%@%@", @"index.php?mod=ajax&act=hyzx&page_no=1&page_size=10&cateid=",type,@"&timestamp=",timestamp,@"&token=",token ];
-    NSLog(@"%@", urlStr);
+//    NSLog(@"%@", urlStr);
     NSURL *url = [NSURL URLWithString:@"http://m.sosozhe.com/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     
@@ -171,7 +215,7 @@
     }
     NSUInteger row = [indexPath row];
     NSDictionary *dict=[self.products objectAtIndex:row];
-    NSLog(@"%@", dict);
+//    NSLog(@"%@", dict);
     
     NSURL *url=[NSURL URLWithString:[dict objectForKey:@"pic_url"]];
     cell.iconView.imageURL=url;
@@ -191,7 +235,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%lu", (unsigned long)self.products.count);
+//    NSLog(@"%lu", (unsigned long)self.products.count);
     return  [[self products]count];
 }
 

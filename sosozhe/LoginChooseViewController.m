@@ -9,6 +9,7 @@
 #import "LoginChooseViewController.h"
 #import "WebViewController.h"
 #import "LoginUtil.h"
+#import "PassValueUtil.h"
 
 @interface LoginChooseViewController ()
 
@@ -23,6 +24,9 @@
     [self.qqLoginButton addTarget:self action:@selector(qqLogin) forControlEvents:UIControlEventTouchDown];
     [self.weiboLoginButton addTarget:self action:@selector(weiboLogin) forControlEvents:UIControlEventTouchDown];
     [self.quitButton addTarget:self action:@selector(quit) forControlEvents:UIControlEventTouchDown];
+    
+    [PassValueUtil setWebViewTitle:nil];
+    [PassValueUtil setWebViewTitle2:nil];
     
 }
 

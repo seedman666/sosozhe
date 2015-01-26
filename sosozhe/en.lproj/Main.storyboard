@@ -21,7 +21,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入商品名称" minimumFontSize="17" id="dkc-7y-W6G" customClass="CustomTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入商城名称" minimumFontSize="17" id="dkc-7y-W6G" customClass="CustomTextField">
                                         <rect key="frame" x="10" y="6" width="300" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -402,26 +402,43 @@
                                 <rect key="frame" x="0.0" y="63" width="320" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Irp-aX-nG8">
-                                        <rect key="frame" x="20" y="8" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OFA-Le-1aL">
-                                        <rect key="frame" x="78" y="8" width="160" height="21"/>
+                                        <rect key="frame" x="8" y="8" width="230" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付宝累计余额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XKa-U3-g5n">
-                                        <rect key="frame" x="78" y="37" width="101" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="累计已返" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XKa-U3-g5n">
+                                        <rect key="frame" x="8" y="37" width="56" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9oa-cX-zuw">
-                                        <rect key="frame" x="187" y="37" width="88" height="21"/>
+                                        <rect key="frame" x="111" y="37" width="61" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a6i-bs-Ykr">
+                                        <rect key="frame" x="79" y="37" width="30" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yn7-kY-tRM">
+                                        <rect key="frame" x="225" y="37" width="41" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="集分宝" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qJz-r9-6ve">
+                                        <rect key="frame" x="180" y="37" width="43" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -523,7 +540,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="8lv-6r-IzI">
-                                <rect key="frame" x="0.0" y="269" width="320" height="43"/>
+                                <rect key="frame" x="0.0" y="313" width="320" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paipai_info_icon.png" id="iSa-Os-NqZ">
@@ -545,7 +562,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="7q4-mC-GSS">
-                                <rect key="frame" x="0.0" y="313" width="320" height="43"/>
+                                <rect key="frame" x="0.0" y="269" width="320" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paipai_info_icon.png" id="Pee-hv-dZD">
@@ -634,7 +651,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="我的账号" image="tab_user_1_s.png" id="cHa-oS-8r8"/>
                     <connections>
-                        <outlet property="avatarImageView" destination="Irp-aX-nG8" id="jel-ru-MJe"/>
+                        <outlet property="jifenbaoLabe" destination="Yn7-kY-tRM" id="cmN-b3-tBg"/>
                         <outlet property="mallOrderView" destination="7q4-mC-GSS" id="IBX-iy-Mbi"/>
                         <outlet property="moneyLabel" destination="9oa-cX-zuw" id="6mL-fZ-Pfi"/>
                         <outlet property="msgButton" destination="97g-ze-CW9" id="iic-RD-tse"/>
@@ -854,8 +871,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="0pZ-Gy-lvd"/>
-        <segue reference="mBp-Ya-Xnr"/>
-        <segue reference="KUO-8F-Ixz"/>
+        <segue reference="hq4-jg-7z2"/>
+        <segue reference="hhO-Sj-eE4"/>
+        <segue reference="th8-1L-3OI"/>
     </inferredMetricsTieBreakers>
 </document>

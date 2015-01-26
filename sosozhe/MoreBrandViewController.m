@@ -72,12 +72,20 @@
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     
-    [client postPath:@"index.php?mod=ajax&act=malls&page=1&num=18" parameters:parameters
+    NSString *urlStr=@"index.php?mod=ajax&act=malls&page=1&num=18";
+    if ([PassValueUtil getMallSearchTitle]) {
+        urlStr=[NSString stringWithFormat:@"index.php?mod=ajax&act=malls&page=1&num=18&title=%@", [[PassValueUtil getMallSearchTitle] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    [client postPath:urlStr parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
-                 self.results=[NSMutableArray arrayWithArray:array];
-                 [self.moreBrandPullTableView reloadData];
-                 [self.HUD removeFromSuperview];
+                 if (array.count == 0) {
+                     
+                 }else{
+                     self.results=[NSMutableArray arrayWithArray:array];
+                     [self.moreBrandPullTableView reloadData];
+                     [self.HUD removeFromSuperview];
+                 }
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"%@", error);
@@ -104,10 +112,10 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     if (textField == [self searchText]) {
-        [PassValueUtil setSearchText:textField.text];
-        [textField resignFirstResponder];
-        [self performSegueWithIdentifier:@"SearchViewIde" sender:self];
-        
+        [PassValueUtil setMallSearchTitle:textField.text];
+//        [textField resignFirstResponder];
+//        [self performSegueWithIdentifier:@"SearchViewIde" sender:self];
+        [self requestHotBrand];
     }
     return YES;
 }
@@ -190,8 +198,13 @@
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
-    NSLog(@"%@", [NSString stringWithFormat:@"index.php?mod=ajax&act=malls&page=%i&num=18", self.page]);
-    [client postPath:[NSString stringWithFormat:@"index.php?mod=ajax&act=malls&page=%i&num=18", self.page] parameters:parameters
+    
+    NSString *urlStr=[NSString stringWithFormat:@"index.php?mod=ajax&act=malls&page=%i&num=18", self.page];
+    if ([PassValueUtil getMallSearchTitle]) {
+        urlStr=[NSString stringWithFormat:@"index.php?mod=ajax&act=malls&page=%i&num=18&title=%@", self.page,[[PassValueUtil getMallSearchTitle] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [client postPath: urlStr parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSArray *array=(NSArray *) [responseObject objectForKey:@"result"];
                  [self.results addObjectsFromArray:array];

@@ -106,15 +106,17 @@
 //    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://www.sosozhe.com"]];
     
     
-     NSString *oldAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    NSLog(@"oldAgent:%@", oldAgent);
-//    self.titleBar.title= [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    self.titleBar.title=[NSString stringWithFormat:@"%@最高返利(%@)", [PassValueUtil getWebViewTitle], [PassValueUtil getWebViewTitle2]];
+//     NSString *oldAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    if ([PassValueUtil getWebViewTitle]) {
+            self.titleBar.title=[NSString stringWithFormat:@"%@最高返利(%@)", [PassValueUtil getWebViewTitle], [PassValueUtil getWebViewTitle2]];
+    }
+
     if ([url isEqualToString:@"http://www.sosozhe.com/index.php?mod=api&act=do"]) {
         [LoginUtil setLogin:YES];
         [LoginUtil checkLoginAsyn];
         [self dismissModalViewControllerAnimated:YES];
     }
+    
 }
 
 -(void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
